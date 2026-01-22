@@ -1,9 +1,6 @@
 <div align="center">
 
-
-![Logotipo de Englishsbs](Logo%20Englishsbs2.jpg)
-
-
+<img src="Logo%20Englishsbs2.jpg" alt="Logotipo de Englishsbs" width="500">
 
 # ENGLISH ONLINE LEARNING
 
