@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Step by Step - Unidad 3</title>
+    <style>
+        :root { --primary: #002d72; --secondary: #c8102e; --success: #28a745; --danger: #dc3545; --bg: #f4f4f9; --text-muted: #666; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; max-width: 650px; width: 100%; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; }
+        .logo { width: 400px; margin-bottom: 20px; }
+        .screen { display: none; }
+        .active { display: block; }
+        .btn { background: var(--primary); color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; width: 90%; margin-top: 10px; transition: 0.3s; text-decoration: none; display: inline-block; }
+        .btn:hover { background: var(--secondary); }
+        .ex-header { display: block; font-size: 0.85em; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
+        .question-text { text-align: left; color: var(--primary); font-size: 1.25em; margin: 0 0 20px 0; }
+        .option { display: block; width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #eee; border-radius: 8px; cursor: pointer; text-align: left; background: white; font-size: 1em; transition: 0.2s; }
+        .selected-correct { border-color: var(--success) !important; background: #d4edda !important; color: #155724; font-weight: bold; }
+        .selected-incorrect { border-color: var(--danger) !important; background: #f8d7da !important; color: #721c24; font-weight: bold; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; text-align: left; font-weight: 500; border-left: 5px solid; }
+        .feedback.correct { background: #d4edda; color: #155724; border-color: var(--success); }
+        .feedback.incorrect { background: #fff3cd; color: #856404; border-color: #ffc107; }
+        .grade-box { background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0; border: 1px solid #ddd; }
+        .grade-num { font-size: 3em; color: var(--primary); font-weight: bold; }
+        .legal { font-size: 0.85em; text-align: center; margin: 20px 5%; color: #555; line-height: 1.5; }
+        .text-input { width: 90%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 5px; font-size: 1.1em; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo-container"><img src="assets/logo.jpg" alt="English Step by Step" class="logo"></div>
+    
+    <div id="welcome-screen" class="screen active">
+        <h2>Bienvenido</h2>
+        <p>Aprende Inglés paso a paso con <strong>Rafael</strong>.</p>
+        <input type="text" id="userName" placeholder="Nombre completo" style="width:90%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:5px;">
+        <input type="email" id="userEmail" placeholder="Tu correo electrónico" style="width:90%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:5px;">
+        <div class="legal">
+            <input type="checkbox" id="legalConsent"> 
+            <label for="legalConsent">Acepto el tratamiento de mis datos para recibir feedback y autorizo el envío de información sobre clases en vivo en TikTok y YouTube.</label>
+        </div>
+        <button class="btn" onclick="startQuiz()">EMPEZAR PRÁCTICA</button>
+    </div>
+
+    <div id="quiz-screen" class="screen">
+        <div id="progress" style="text-align: right; color: #666; font-size: 0.9em; margin-bottom: 10px;"></div>
+        <span id="ex-label" class="ex-header"></span>
+        <h3 id="question-text" class="question-text"></h3>
+        <div id="options-container"></div>
+        <div id="feedback-area" class="feedback"></div>
+        <button id="next-btn" class="btn" style="display:none;" onclick="nextQuestion()">Siguiente Ejercicio</button>
+    </div>
+
+    <div id="final-screen" class="screen">
+        <h2>¡Práctica Terminada, <span id="display-name"></span>!</h2>
+        <div class="grade-box">
+            <p>Tu calificación final:</p>
+            <div id="final-grade" class="grade-num"></div>
+            <p id="stats-text"></p>
+        </div>
+        <a id="wa-link" href="#" class="btn" style="background:#25d366;" target="_blank">Contactar por WhatsApp con Rafael</a>
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
+            <a href="https://www.tiktok.com/@englishsbs.peru" target="_blank" class="btn" style="background:#000; width: 40%;">TikTok</a>
+            <a href="https://www.youtube.com/@Englishsbs_peru" target="_blank" class="btn" style="background:#FF0000; width: 40%;">YouTube</a>
+        </div>
+        <hr style="margin: 20px 0; border: 0.5px solid #eee;">
+        <button class="btn" style="background: #666; width: 90%;" onclick="location.reload()">Volver a realizar la práctica</button>
+        <a href="https://englissbs.github.io/Englishsbs/" class="btn" style="background: #444; width: 90%;">Regresar al inicio</a>
+    </div>
+</div>
+
+<script>
+    const positives = ["¡Excelente!", "¡Muy bien!", "¡Vas por buen camino!", "¡Fantástico!", "¡Increíble!", "¡Lo lograste!"];
+    const supports = ["No es la alternativa correcta, ¡sigue intentándolo!", "Sugiero que vuelvas a revisar este punto.", "¡Casi lo tienes! Intenta una vez más.", "No te desanimes, vamos a repasar.", "Te sugiero analizar bien la estructura.", "¡Buen intento!"];
+
+    const questions = [
+        // SECCIÓN A (7 preguntas)
+        {n:"Ex. A-1", type:"choice", q:"What's Mr. Morales doing?", options:[{t:"He's sleeping.", c:true, f:"'He' es para hombre."}, {t:"She's reading.", c:false, f:"'She' es para mujer."}, {t:"They're eating.", c:false, f:"Es singular."}]},
+        {n:"Ex. A-2", type:"choice", q:"What are you doing?", options:[{t:"I'm cooking.", c:true, f:"Respondes por ti mismo."}, {t:"They're eating.", c:false, f:"No eres ellos."}, {t:"She's reading.", c:false, f:"No eres ella."}]},
+        {n:"Ex. A-3", type:"choice", q:"What's Mrs. Mendoza doing?", options:[{t:"She's eating.", c:true, f:"'She' es el pronombre femenino."}, {t:"He's studying.", c:false, f:"'He' es para hombre."}, {t:"They're singing.", c:false, f:"Es una sola persona."}]},
+        {n:"Ex. A-4", type:"choice", q:"What are Luis and Ana doing?", options:[{t:"They're singing.", c:true, f:"Usamos 'they' para plural."}, {t:"We're watching TV.", c:false, f:"No estás con ellos."}, {t:"He's studying.", c:false, f:"Son dos personas."}]},
+        {n:"Ex. A-5", type:"choice", q:"What are you and Carlos doing?", options:[{t:"We're playing cards.", c:true, f:"Incluyes a 'nosotros'."}, {t:"They're teaching.", c:false, f:"No eres 'ellos'."}, {t:"I'm cooking.", c:false, f:"Son dos personas."}]},
+        {n:"Ex. A-6", type:"choice", q:"What am I doing?", options:[{t:"You're swimming.", c:true, f:"Alguien más te responde."}, {t:"He's planting flowers.", c:false, f:"No eres él."}, {t:"I'm eating.", c:false, f:"Te responden a ti."}]},
+        {n:"Ex. A-7", type:"choice", q:"What's the dog doing?", options:[{t:"It's sleeping.", c:true, f:"'It' para animales."}, {t:"I'm eating.", c:false, f:"No eres el perro."}, {t:"She's eating.", c:false, f:"Usamos 'it'."}]},
+
+        // SECCIÓN B (Escritura)
+        {n:"Ex. B-1", type:"text", q:"What's Mr. Wilson doing? (watch TV)", accepted:["He is watching TV", "He's watching TV", "Mr Wilson is watching TV"], f:"Usa Subject + is + watching TV."},
+        {n:"Ex. B-2", type:"text", q:"What are Sofia and Elena doing? (eat lunch)", accepted:["They are eating lunch", "They're eating lunch", "Sofia and Elena are eating lunch"], f:"Usa plural + are + eating lunch."},
+        {n:"Ex. B-3", type:"text", q:"What's Mrs. Pimentel doing? (plant flowers)", accepted:["She is planting flowers", "She's planting flowers", "Mrs Pimentel is planting flowers"], f:"She + is + planting flowers."},
+        {n:"Ex. B-4", type:"text", q:"What are you doing? (drink milk)", accepted:["I am drinking milk", "I'm drinking milk"], f:"I + am + drinking milk."},
+        {n:"Ex. B-5", type:"text", q:"What are you and Diego doing? (play cards)", accepted:["We are playing cards", "We're playing cards"], f:"We + are + playing cards."},
+        {n:"Ex. B-6", type:"text", q:"What am I doing? (listen to music)", accepted:["You are listening to music", "You're listening to music"], f:"You + are + listening to music."},
+        {n:"Ex. B-7", type:"text", q:"What are Mr. and Mrs. Lee doing? (Hint: He / sleep — She / read)", accepted:["He is sleeping and she is reading", "He's sleeping and she's reading", "He is sleeping and she's reading", "He's sleeping and she is reading"], f:"Cuando dos personas hacen cosas distintas, usamos 'and' para conectar ambas oraciones."},
+
+        // SECCIÓN C
+        {n:"Ex. C-1", type:"text", q:"What's Ms. Sanchez doing? (watch TV)", accepted:["She is watching TV", "She's watching TV", "Ms Sanchez is watching TV"], f:"Sujeto + is + watching TV."},
+        {n:"Ex. C-2", type:"text", q:"What are you and Pedro doing? (drink lemonade)", accepted:["We are drinking lemonade", "We're drinking lemonade"], f:"We + are + drinking lemonade."},
+        {n:"Ex. C-3", type:"text", q:"What's Mr. Gomez doing? (read the newspaper)", accepted:["He is reading the newspaper", "He's reading the newspaper", "Mr Gomez is reading the newspaper"], f:"He + is + reading the newspaper."},
+        {n:"Ex. C-4", type:"text", q:"What are you doing? (play the guitar)", accepted:["I am playing the guitar", "I'm playing the guitar"], f:"I + am + playing the guitar."},
+        {n:"Ex. C-5", type:"text", q:"What are Joe and Ken doing? (listen to music)", accepted:["They are listening to music", "They're listening to music"], f:"They + are + listening to music."},
+        {n:"Ex. C-6", type:"text", q:"What am I doing? (plant flowers)", accepted:["You are planting flowers", "You're planting flowers"], f:"You + are + planting flowers."}
+    ];
+
+    let current = 0, hits = 0, logs = [];
+
+    function startQuiz() {
+        const user = document.getElementById('userName').value;
+        if(!user || !document.getElementById('legalConsent').checked) return alert("Por favor completa tus datos y acepta la autorización.");
+        document.getElementById('display-name').innerText = user;
+        document.getElementById('welcome-screen').classList.remove('active');
+        document.getElementById('quiz-screen').classList.add('active');
+        show();
+    }
+
+    function show() {
+        const q = questions[current];
+        document.getElementById('progress').innerText = `Ejercicio ${current+1} de ${questions.length}`;
+        document.getElementById('ex-label').innerText = q.n;
+        document.getElementById('question-text').innerText = q.q;
+        const container = document.getElementById('options-container'); container.innerHTML = '';
+        const f = document.getElementById('feedback-area'); f.style.display = 'none';
+        document.getElementById('next-btn').style.display = 'none';
+
+        if(q.type === "choice") {
+            q.options.forEach(o => {
+                const b = document.createElement('button'); b.className = 'option'; b.innerText = o.t;
+                b.onclick = (e) => validate(o.c, o.t, o.f, e.target);
+                container.appendChild(b);
+            });
+        } else {
+            const input = document.createElement('input'); input.className = 'text-input'; input.id = 'user-input';
+            input.placeholder = "Escribe tu respuesta...";
+            const b = document.createElement('button'); b.className = 'btn'; b.innerText = "VERIFICAR";
+            b.onclick = () => {
+                const val = document.getElementById('user-input').value.trim();
+                const cleanInput = val.toLowerCase().replace(/[.'!]/g, "").replace(/\s+/g, " ");
+                const isOk = q.accepted.some(a => a.toLowerCase().replace(/[.'!]/g, "").replace(/\s+/g, " ") === cleanInput);
+                validate(isOk, val, q.f, null);
+            };
+            container.appendChild(input); container.appendChild(b);
+        }
+    }
+
+    function validate(ok, text, feed, element) {
+        const f = document.getElementById('feedback-area');
+        if(ok) {
+            if(element) element.classList.add('selected-correct');
+            f.innerText = `${positives[Math.floor(Math.random()*positives.length)]} ${feed}`;
+            f.className = "feedback correct";
+            hits++;
+        } else {
+            if(element) element.classList.add('selected-incorrect');
+            f.innerText = `${supports[Math.floor(Math.random()*supports.length)]} ${feed}`;
+            f.className = "feedback incorrect";
+        }
+        f.style.display = 'block';
+        document.getElementById('next-btn').style.display = 'block';
+        if(element) document.querySelectorAll('.option').forEach(x => x.style.pointerEvents = 'none');
+        logs.push({q: questions[current].q, a: text, ok: ok});
+    }
+
+    function nextQuestion() { current++; if(current < questions.length) show(); else finish(); }
+
+    function finish() {
+        const grade = Math.round((hits/questions.length)*100);
+        document.getElementById('quiz-screen').classList.remove('active');
+        document.getElementById('final-screen').classList.add('active');
+        document.getElementById('final-grade').innerText = grade + "%";
+        document.getElementById('stats-text').innerText = `Aciertos: ${hits} | Errores: ${questions.length - hits}`;
+        document.getElementById('wa-link').href = `https://wa.me/51990171277?text=Hola%20Rafael,%20soy%20${document.getElementById('userName').value}%20y%20saqué%20${grade}%%20en%20la%20Unidad%203.`;
+        
+        fetch("https://formspree.io/f/xojeljpo", {
+            method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ Alumno: document.getElementById('userName').value, Nota: grade + "%", Detalle: logs })
+        });
+    }
+</script>
+</body>
+</html>
