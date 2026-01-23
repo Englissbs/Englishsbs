@@ -27,7 +27,9 @@
 ---
 
 ## 📩 Contact & Support
-¿Tienes alguna duda sobre los ejercicios o las clases? Necesitas aprender Inglés¡Escríbeme directamente!
+¿Tienes alguna duda sobre los ejercicios? 
+¿Necesitas aprender Inglés?
+Escríbeme directamente!
 
 <a href="https://wa.me/51990171277?text=Hola%20Profesor%20Rafael,%20tengo%20una%20consulta" target="_blank">
   <img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/whatsapp.svg" alt="WhatsApp" width="40" height="40" /> 
