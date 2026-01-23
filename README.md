@@ -38,5 +38,5 @@ Escríbeme directamente!
 
 ---
 <div align="center">
-> **A nuestros estudiantes:** Los quizzes, exámenes de medio ciclo y final de ciclo son administradas únicamente a través de nuestra plataforma interna.
+  <p><strong>A nuestros estudiantes:</strong> Los quizzes, exámenes de medio ciclo y final de ciclo son administrados únicamente a través de nuestra plataforma interna.</p>
 </div>
