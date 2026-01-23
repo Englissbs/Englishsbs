@@ -10,12 +10,12 @@
 
 ## 📚 Resources by Level
 ### 🧒 Young Learners (Prepare!)
-* [Grammar & Vocabulary - Prepare 1](https://englissbs.github.io/Englishsbs/Young-Learners/Prepare-1/)
-* [Grammar & Vocabulary - Prepare 2](https://englissbs.github.io/Englishsbs/Young-Learners/Prepare-2/)
+* [Prepare 1](https://englissbs.github.io/Englishsbs/Young-Learners/Prepare-1/)
+* [Prepare 2](https://englissbs.github.io/Englishsbs/Young-Learners/Prepare-2/)
 
 ### 🎓 Adults (Interchange)
-* [Interchange Intro - Activities](https://englissbs.github.io/Englishsbs/Adults/Interchange-Intro/)
-* [Interchange 1 - Activities](https://englissbs.github.io/Englishsbs/Adults/Interchange-1/)
+* [Interchange Intro](https://englissbs.github.io/Englishsbs/Adults/Interchange-Intro/)
+* [Interchange 1](https://englissbs.github.io/Englishsbs/Adults/Interchange-1/)
 
 ---
 
