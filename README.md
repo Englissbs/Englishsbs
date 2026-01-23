@@ -12,16 +12,16 @@
 ### 🧒 Young Learners (Prepare!)
 * [Prepare 1](https://englissbs.github.io/Englishsbs/Young-Learners/Prepare-1/)
 * [Prepare 2](https://englissbs.github.io/Englishsbs/Young-Learners/Prepare-2/)
-* [Prepare 2](https://englissbs.github.io/Englishsbs/Young-Learners/Prepare-3/)
-* [Prepare 2](https://englissbs.github.io/Englishsbs/Young-Learners/Prepare-4/)
-* [Prepare 2](https://englissbs.github.io/Englishsbs/Young-Learners/Prepare-5/)
-* [Prepare 2](https://englissbs.github.io/Englishsbs/Young-Learners/Prepare-6/)
+* [Prepare 3](https://englissbs.github.io/Englishsbs/Young-Learners/Prepare-3/)
+* [Prepare 4](https://englissbs.github.io/Englishsbs/Young-Learners/Prepare-4/)
+* [Prepare 5](https://englissbs.github.io/Englishsbs/Young-Learners/Prepare-5/)
+* [Prepare 6](https://englissbs.github.io/Englishsbs/Young-Learners/Prepare-6/)
   
 ### 🎓 Adults (Interchange)
 * [Interchange Intro](https://englissbs.github.io/Englishsbs/Adults/Interchange-Intro/)
 * [Interchange 1](https://englissbs.github.io/Englishsbs/Adults/Interchange-1/)
-* [Interchange 1](https://englissbs.github.io/Englishsbs/Adults/Interchange-2/)
-* [Interchange 1](https://englissbs.github.io/Englishsbs/Adults/Interchange-3/)
+* [Interchange 2](https://englissbs.github.io/Englishsbs/Adults/Interchange-2/)
+* [Interchange 3](https://englissbs.github.io/Englishsbs/Adults/Interchange-3/)
 
 ---
 ## ✍️ GRAMMAR
