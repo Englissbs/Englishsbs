@@ -38,5 +38,5 @@ Escríbeme directamente!
 
 ---
 <div align="center">
-> **Note for students:** Exams are administered through our internal platform.
+> **A nuestros estudiantes:** Los quizzes, exámenes de medio ciclo y final de ciclo son administradas únicamente a través de nuestra plataforma interna.
 </div>
