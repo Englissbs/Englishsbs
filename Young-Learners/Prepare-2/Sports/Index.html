@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Step by Step - Master Practice</title>
+    <style>
+        :root { --primary: #002d72; --secondary: #c8102e; --success: #28a745; --danger: #dc3545; --bg: #f4f4f9; --text-muted: #666; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; max-width: 650px; width: 100%; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; }
+        .logo { width: 300px; margin-bottom: 20px; }
+        .screen { display: none; }
+        .active { display: block; }
+        .btn { background: var(--primary); color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; width: 90%; margin-top: 10px; transition: 0.3s; text-decoration: none; display: inline-block; }
+        .btn:hover { background: var(--secondary); }
+        .ex-header { display: block; font-size: 0.85em; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
+        .question-text { text-align: left; color: var(--primary); font-size: 1.25em; margin: 15px 0 20px 0; line-height: 1.5; }
+        .option { display: block; width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #eee; border-radius: 8px; cursor: pointer; text-align: left; background: white; font-size: 1em; transition: 0.2s; }
+        .selected-correct { border-color: var(--success) !important; background: #d4edda !important; color: #155724; font-weight: bold; }
+        .selected-incorrect { border-color: var(--danger) !important; background: #f8d7da !important; color: #721c24; font-weight: bold; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; text-align: left; font-weight: 500; border-left: 5px solid; }
+        .feedback.correct { background: #d4edda; color: #155724; border-color: var(--success); }
+        .feedback.incorrect { background: #fff3cd; color: #856404; border-color: #ffc107; }
+        .grade-box { background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0; border: 1px solid #ddd; }
+        .grade-num { font-size: 3em; color: var(--primary); font-weight: bold; }
+        .text-input { width: 90%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 5px; font-size: 1.1em; }
+        .exercise-img { width: 100%; max-width: 400px; border-radius: 10px; margin-bottom: 10px; border: 1px solid #ddd; }
+        .dialogue-box { background: #f0f4f8; padding: 15px; border-radius: 8px; margin-bottom: 15px; text-align: left; border-left: 4px solid var(--primary); line-height: 1.8; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo-container"><img src="assets/logo.jpg" alt="English Step by Step" class="logo"></div>
+    
+    <div id="welcome-screen" class="screen active">
+        <h2>BIENVENIDO</h2>
+        <p>Aprende Inglés paso a paso con <strong>Rafael</strong>.</p>
+        <input type="text" id="userName" placeholder="Nombre completo" class="text-input">
+        <input type="email" id="userEmail" placeholder="Tu correo electrónico" class="text-input">
+        <div style="font-size: 0.85em; text-align: center; margin: 20px 5%; color: #555; line-height: 1.5;">
+            <input type="checkbox" id="legalConsent"> 
+            <label for="legalConsent">Acepto el tratamiento de mis datos personales para recibir mi feedback y autorizo el envío de información sobre Lives en TikTok y YouTube.</label>
+        </div>
+        <button class="btn" onclick="startQuiz()">EMPEZAR PRÁCTICA</button>
+    </div>
+
+    <div id="quiz-screen" class="screen">
+        <div id="progress" style="text-align: right; color: #666; font-size: 0.9em; margin-bottom: 10px;"></div>
+        <span id="ex-label" class="ex-header"></span>
+        <div id="image-area"></div>
+        <div id="question-area"></div>
+        <div id="options-container"></div>
+        <div id="feedback-area" class="feedback"></div>
+        <button id="next-btn" class="btn" style="display:none;" onclick="nextQuestion()">Siguiente Ejercicio</button>
+    </div>
+
+    <div id="final-screen" class="screen">
+        <h2>¡Práctica Terminada, <span id="display-name"></span>!</h2>
+        <div class="grade-box">
+            <p>Tu calificación final:</p>
+            <div id="final-grade" class="grade-num"></div>
+            <p id="stats-text"></p>
+        </div>
+        <a id="wa-link" href="#" class="btn" style="background:#25d366;" target="_blank">Contactar con Rafael por WhatsApp</a>
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
+            <a href="https://www.tiktok.com/@englishsbs.peru" target="_blank" class="btn" style="background:#000; width: 45%;">TikTok</a>
+            <a href="https://www.youtube.com/@Englishsbs_peru" target="_blank" class="btn" style="background:#FF0000; width: 45%;">YouTube</a>
+        </div>
+        <button class="btn" style="background: #666;" onclick="location.reload()">Volver a realizar la práctica</button>
+        <a href="https://englissbs.github.io/Englishsbs/" class="btn" style="background: #444;">Regresar al inicio</a>
+    </div>
+</div>
+
+<script>
+    const positives = ["¡Muy bien hecho, sigue adelante!", "¡Veo que estás progresando, así se hace!", "¡Fantástico trabajo!", "¡Increíble!", "¡Lo lograste!", "¡Excelente!"];
+    const supports = ["Creo que necesitas revisar un poquito más este punto.", "No te preocupes, el error es parte del aprendizaje.", "Casi lo tienes, dale otra mirada.", "Buen intento, sigue practicando.", "Me parece que hubo una pequeña confusión.", "No te desanimes, fíjate bien en el detalle."];
+
+    const questions = [
+        // GRUPO 1: GO, DO, PLAY (Sección A)
+        {n:"Ex. 1", type:"choice", img:"assets/rugby.jpg", q:"Juan and his friends ________ rugby on Saturdays.", options:[{t:"play", c:true}, {t:"go", c:false}, {t:"do", c:false}]},
+        {n:"Ex. 2", type:"choice", img:"assets/cycling.jpg", q:"Maria ________ cycling every morning.", options:[{t:"goes", c:true}, {t:"plays", c:false}, {t:"does", c:false}]},
+        {n:"Ex. 3", type:"choice", img:"assets/gymnastics.jpg", q:"Diego ________ gymnastics at school.", options:[{t:"does", c:true}, {t:"goes", c:false}, {t:"plays", c:false}]},
+        {n:"Ex. 4", type:"choice", img:"assets/surfing.jpg", q:"Carmen ________ surfing during her vacations.", options:[{t:"goes", c:true}, {t:"does", c:false}, {t:"plays", c:false}]},
+        {n:"Ex. 5", type:"choice", img:"assets/baseball.jpg", q:"Luis ________ baseball with his team.", options:[{t:"plays", c:true}, {t:"does", c:false}, {t:"goes", c:false}]},
+        {n:"Ex. 6", type:"choice", img:"assets/karate.jpg", q:"Rosa ________ karate on Tuesdays.", options:[{t:"does", c:true}, {t:"plays", c:false}, {t:"goes", c:false}]},
+        {n:"Ex. 7", type:"choice", img:"assets/swimming.jpg", q:"Javier ________ swimming at the club.", options:[{t:"goes", c:true}, {t:"plays", c:false}, {t:"does", c:false}]},
+        {n:"Ex. 8", type:"choice", img:"assets/volleyball.jpg", q:"Elena and Sofia ________ volleyball at the beach.", options:[{t:"play", c:true}, {t:"go", c:false}, {t:"do", c:false}]},
+        // GRUPO 2: ADVERBIOS DE FRECUENCIA Y CONJUGACIÓN (Corregido)
+        {n:"Ex. 9", type:"choice", img:"assets/table_tennis.jpg", q:"My grandparents always ________ table tennis on Sundays.", options:[{t:"play", c:true}, {t:"plays", c:false}, {t:"playing", c:false}]},
+        {n:"Ex. 10", type:"choice", img:"assets/snowboarding.jpg", q:"Lucia sometimes ________ snowboarding in winter.", options:[{t:"goes", c:true}, {t:"go", c:false}, {t:"going", c:false}]},
+        {n:"Ex. 11", type:"text", inst:"Write the correct form of the verb (DO):", img:"assets/gymnastics.jpg", q:"Thiago often ________ gymnastics after school.", accepted:["does"]},
+        {n:"Ex. 12", type:"text", inst:"Write the correct form of the verb (GO):", img:"assets/cycling.jpg", q:"Ines usually ________ cycling with her dad.", accepted:["goes"]},
+
+        // GRUPO 3: PREGUNTAS ORDENADAS (Sección C)
+        {n:"Ex. 13", type:"dialogue", inst:"Order the words to make a question:", img:"assets/volleyball.jpg", ans:"Yes, Elena and Sofia often play volleyball.", prompt:"often / Elena and Sofia / volleyball / play / do / ?", accepted:["Do Elena and Sofia often play volleyball"]},
+        {n:"Ex. 14", type:"dialogue", inst:"Order the words to make a question:", img:"assets/cycling.jpg", ans:"No, Maria usually goes cycling in the park.", prompt:"usually / Maria / in the park / go / cycling / does / ?", accepted:["Does Maria usually go cycling in the park"]},
+        {n:"Ex. 15", type:"dialogue", inst:"Order the words to make a question:", img:"assets/badminton.jpg", ans:"My parents sometimes play badminton on weekends.", prompt:"sometimes / your parents / badminton / play / do / on weekends / ?", accepted:["Do your parents sometimes play badminton on weekends"]},
+        {n:"Ex. 16", type:"dialogue", inst:"Order the words to make a question:", img:"assets/snowboarding.jpg", ans:"I often go snowboarding with Thiago.", prompt:"often / you / go / snowboarding / do / with Thiago / ?", accepted:["Do you often go snowboarding with Thiago"]},
+        {n:"Ex. 17", type:"dialogue", inst:"Order the words to make a question:", img:"assets/sailing.jpg", ans:"Yes, Javier always goes sailing in summer.", prompt:"always / sailing / Javier / go / does / in the summer / ?", accepted:["Does Javier always go sailing in the summer"]},
+        
+        // EXTRAS DE REFUERZO
+        {n:"Ex. 18", type:"text", inst:"Write the missing verb:", img:"assets/hockey.jpg", q:"Mateo ________ hockey every Thursday.", accepted:["plays"]},
+        {n:"Ex. 19", type:"text", inst:"Write the missing verb:", img:"assets/skating.jpg", q:"Lucia ________ skating in the park.", accepted:["goes"]},
+        {n:"Ex. 20", type:"dialogue", inst:"Write the question for the answer:", img:"assets/athletics.jpg", ans:"Rosa does athletics twice a week.", prompt:"How often / Rosa / do / athletics", accepted:["How often does Rosa do athletics"]}
+    ];
+
+    let current = 0, hits = 0;
+
+    function startQuiz() {
+        const u = document.getElementById('userName').value;
+        if(!u || !document.getElementById('legalConsent').checked) return alert("Por favor completa tus datos.");
+        document.getElementById('display-name').innerText = u;
+        document.getElementById('welcome-screen').classList.remove('active');
+        document.getElementById('quiz-screen').classList.add('active');
+        show();
+    }
+
+    function show() {
+        const q = questions[current];
+        document.getElementById('progress').innerText = `Ejercicio ${current+1} de ${questions.length}`;
+        document.getElementById('ex-label').innerText = q.n;
+        const container = document.getElementById('options-container'); container.innerHTML = '';
+        const qArea = document.getElementById('question-area'); qArea.innerHTML = '';
+        const imgArea = document.getElementById('image-area'); imgArea.innerHTML = '';
+        document.getElementById('feedback-area').style.display = 'none';
+        document.getElementById('next-btn').style.display = 'none';
+
+        if(q.img) {
+            const img = document.createElement('img'); img.src = q.img; img.className = 'exercise-img';
+            imgArea.appendChild(img);
+        }
+
+        if(q.type === "choice") {
+            const h3 = document.createElement('h3'); h3.className = 'question-text'; h3.innerText = q.q;
+            qArea.appendChild(h3);
+            const shuffled = [...q.options].sort(() => Math.random() - 0.5);
+            shuffled.forEach(o => {
+                const b = document.createElement('button'); b.className = 'option'; b.innerText = o.t;
+                b.onclick = (e) => validate(o.c, o.t, e.target);
+                container.appendChild(b);
+            });
+        } else if(q.type === "text" || q.type === "dialogue") {
+            const instPara = document.createElement('p'); instPara.style.fontWeight = 'bold'; instPara.style.textAlign = 'left';
+            instPara.innerText = q.inst;
+            qArea.appendChild(instPara);
+            if(q.type === "dialogue") {
+                const dBox = document.createElement('div'); dBox.className = 'dialogue-box';
+                dBox.innerHTML = `<strong>A:</strong> (<em>${q.prompt}</em>) _________________?<br><strong>B:</strong> ${q.ans}`;
+                qArea.appendChild(dBox);
+            } else {
+                const h3 = document.createElement('h3'); h3.className = 'question-text'; h3.innerText = q.q;
+                qArea.appendChild(h3);
+            }
+            const input = document.createElement('input'); input.className = 'text-input'; input.id = 'user-input';
+            const b = document.createElement('button'); b.className = 'btn'; b.innerText = "VERIFICAR";
+            b.onclick = () => {
+                const val = document.getElementById('user-input').value.trim();
+                const clean = val.toLowerCase().replace(/[?'!.]/g, "").replace(/\s+/g, " ");
+                const ok = q.accepted.some(a => a.toLowerCase().replace(/[?'!.]/g, "").replace(/\s+/g, " ") === clean);
+                validate(ok, val, null);
+            };
+            container.appendChild(input); container.appendChild(b);
+        }
+    }
+
+    function validate(ok, text, element) {
+        const f = document.getElementById('feedback-area');
+        if(ok) {
+            if(element) element.classList.add('selected-correct');
+            f.innerText = positives[Math.floor(Math.random()*positives.length)];
+            f.className = "feedback correct";
+            hits++;
+        } else {
+            if(element) element.classList.add('selected-incorrect');
+            f.innerText = supports[Math.floor(Math.random()*supports.length)];
+            f.className = "feedback incorrect";
+        }
+        f.style.display = 'block';
+        document.getElementById('next-btn').style.display = 'block';
+        if(element) document.querySelectorAll('.option').forEach(x => x.style.pointerEvents = 'none');
+    }
+
+    function nextQuestion() { current++; if(current < questions.length) show(); else finish(); }
+
+    function finish() {
+        let grade = Math.round((hits/questions.length)*100);
+        document.getElementById('quiz-screen').classList.remove('active');
+        document.getElementById('final-screen').classList.add('active');
+        document.getElementById('final-grade').innerText = grade + "%";
+        document.getElementById('stats-text').innerText = `Aciertos: ${hits} de ${questions.length}`;
+        const u = document.getElementById('userName').value;
+        document.getElementById('wa-link').href = `https://wa.me/51990171277?text=Hola%20Rafael,%20soy%20${u}%20y%20saqué%20${grade}%%20en%20la%20práctica%20de%20deportes.`;
+    }
+</script>
+</body>
+</html>
