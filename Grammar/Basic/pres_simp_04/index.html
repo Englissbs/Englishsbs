@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Step by Step - Present Simple & Frequency</title>
+    <style>
+        :root { --primary: #002d72; --secondary: #c8102e; --success: #28a745; --danger: #dc3545; --bg: #f4f4f9; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; max-width: 850px; width: 100%; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; position: relative; }
+        .welcome-container { max-width: 65%; margin: 0 auto; }
+        .logo { width: 300px; margin-bottom: 20px; }
+        .screen { display: none; }
+        .active { display: block; }
+        .btn { background: var(--primary); color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; width: 90%; margin-top: 10px; transition: 0.3s; text-decoration: none; display: inline-block; }
+        .btn:hover { background: var(--secondary); }
+        .live-counter { position: sticky; top: 0; background: var(--primary); color: white; padding: 10px 20px; border-radius: 0 0 10px 10px; font-weight: bold; font-size: 0.9em; margin-bottom: 20px; z-index: 100; display: inline-block; }
+        .exercise-box { text-align: left; background: #f0f4f8; padding: 25px; border-radius: 10px; border-left: 5px solid var(--primary); margin-bottom: 20px; line-height: 2.5; }
+        .verb-list { background: #fff; padding: 10px; border: 1px dashed var(--primary); border-radius: 8px; margin-bottom: 15px; font-weight: bold; color: var(--secondary); text-align: center; }
+        .inline-input { border: 2px solid var(--primary); padding: 5px; width: 140px; border-radius: 4px; font-weight: bold; font-family: inherit; }
+        .q-card { background: #fff; border: 2px solid #eee; padding: 20px; border-radius: 15px; margin-top: 15px; text-align: left; display: flex; flex-direction: column; align-items: center; }
+        .q-img { width: 100%; max-width: 300px; border-radius: 10px; margin-bottom: 15px; }
+        .grade-box { background: #f8f9fa; padding: 20px; border-radius: 10px; border: 1px solid #ddd; margin: 20px 0; }
+        .grade-num { font-size: 3.5em; color: var(--primary); font-weight: bold; }
+        .text-input-full { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 5px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo-container"><img src="assets/logo.jpg" alt="English Step by Step" class="logo"></div>
+    
+    <div id="welcome-screen" class="screen active">
+        <div class="welcome-container">
+            <h2>BIENVENIDO</h2>
+            <p>Aprende Inglés paso a paso con <strong>Rafael</strong>.</p>
+            <input type="text" id="userName" placeholder="Nombre completo" class="text-input-full">
+            <input type="email" id="userEmail" placeholder="Tu correo electrónico" class="text-input-full">
+            <div style="font-size: 0.85em; text-align: center; margin: 20px 0; color: #555;">
+                <input type="checkbox" id="legalConsent"> 
+                <label for="legalConsent">Acepto el tratamiento de datos y autorizo información sobre Lives en TikTok y YouTube.</label>
+            </div>
+            <button class="btn" onclick="startApp()">EMPEZAR PRÁCTICA</button>
+        </div>
+    </div>
+
+    <div id="block1-screen" class="screen">
+        <div class="live-counter">Aciertos: <span id="hits1">0</span> / 11</div>
+        <h3 style="color: var(--primary); text-align: left;">Part 1: Complete the sentences using the verbs from the list</h3>
+        <div class="verb-list">boil — close — cost — cost — like — like — meet — open — speak — teach — wash</div>
+        <div class="exercise-box">
+            1. Maria <input type="text" id="p1_1" class="inline-input" oninput="checkP1()"> four languages.<br>
+            2. Banks usually <input type="text" id="p1_2" class="inline-input" oninput="checkP1()"> at 9:00 in the morning.<br>
+            3. The art museum <input type="text" id="p1_3" class="inline-input" oninput="checkP1()"> at 5:00 in the afternoon.<br>
+            4. Jessica is a teacher. She <input type="text" id="p1_4" class="inline-input" oninput="checkP1()"> math to young children.<br>
+            5. My job is very interesting. I <input type="text" id="p1_5" class="inline-input" oninput="checkP1()"> a lot of people.<br>
+            6. Mike’s car is always dirty. He never <input type="text" id="p1_6" class="inline-input" oninput="checkP1()"> it.<br>
+            7. Food is expensive. It <input type="text" id="p1_7" class="inline-input" oninput="checkP1()"> a lot of money.<br>
+            8. Shoes are expensive. They <input type="text" id="p1_8" class="inline-input" oninput="checkP1()"> a lot of money.<br>
+            9. Water <input type="text" id="p1_9" class="inline-input" oninput="checkP1()"> at 100 degrees Celsius.<br>
+            10. Julia and I are good friends. I <input type="text" id="p1_10" class="inline-input" oninput="checkP1()"> her, and she <input type="text" id="p1_11" class="inline-input" oninput="checkP1()"> me.
+        </div>
+        <button class="btn" onclick="goToBlock2()">Siguiente Bloque</button>
+    </div>
+
+    <div id="block2-screen" class="screen">
+        <div class="live-counter">Aciertos totales: <span id="hits_total">0</span> / 20</div>
+        <h3 style="color: var(--primary); text-align: left;">Part 2: Order the words and use the right form of the verb</h3>
+        <div id="question-area"></div>
+        <button id="btn-next-q" class="btn" onclick="nextQuestionB2()">Siguiente Oración</button>
+        <button id="btn-finish" class="btn" style="display:none;" onclick="finishAll()">Finalizar Práctica</button>
+    </div>
+
+    <div id="final-screen" class="screen">
+        <h2>¡Excelente trabajo, <span id="display-name"></span>!</h2>
+        <div class="grade-box">
+            <p>Tu calificación final:</p>
+            <div id="final-grade" class="grade-num"></div>
+            <p id="stats-text"></p>
+        </div>
+        <a id="wa-link" href="#" class="btn" style="background:#25d366;" target="_blank">Enviar resultados a Rafael</a>
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
+            <a href="https://www.tiktok.com/@englishsbs.peru" target="_blank" class="btn" style="background:#000; width: 45%;">TikTok</a>
+            <a href="https://www.youtube.com/@Englishsbs_peru" target="_blank" class="btn" style="background:#FF0000; width: 45%;">YouTube</a>
+        </div>
+        <button class="btn" style="background: #666;" onclick="location.reload()">Reintentar</button>
+        <a href="https://englissbs.github.io/Englishsbs/" class="btn" style="background: #444;">Regresar al Inicio</a>
+    </div>
+</div>
+
+<script>
+    const p1Ans = { p1_1: "speaks", p1_2: "open", p1_3: "closes", p1_4: "teaches", p1_5: "meet", p1_6: "washes", p1_7: "costs", p1_8: "cost", p1_9: "boils", p1_10: "like", p1_11: "likes" };
+    
+    const p2Data = [
+        { q: "(always / early / Dan / arrive)", a: "dan always arrives early", img: "assets/dan.jpg" },
+        { q: "(to the movies / never / I / go)", a: "i never go to the movies", img: "assets/cinema.jpg" },
+        { q: "(work / My mother / hard / always)", a: "my mother always works hard", img: "assets/mother_work.jpg" },
+        { q: "(like / chocolate / children / usually)", a: "children usually like chocolate", img: "assets/chocolate.jpg" },
+        { q: "(My sister / parties / enjoy / always)", a: "my sister always enjoys parties", img: "assets/party.jpg" },
+        { q: "(often / people's names / I / forget)", a: "i often forget people's names", img: "assets/memory.jpg" },
+        { q: "(movies / My brother / watch / never)", a: "my brother never watches movies", img: "assets/movies.jpg" },
+        { q: "(usually / dinner / we / have / at 6:30)", a: "we usually have dinner at 6:30", img: "assets/dinner.jpg" },
+        { q: "(Jennifer / always / nice clothes / wear)", a: "jennifer always wears nice clothes", img: "assets/clothes.jpg" }
+    ];
+
+    let currentQ = 0, p1Hits = 0, p2Results = Array(9).fill(false);
+
+    function startApp() {
+        const u = document.getElementById('userName').value;
+        if(!u || !document.getElementById('legalConsent').checked) return alert("Completa tus datos.");
+        document.getElementById('display-name').innerText = u;
+        document.getElementById('welcome-screen').classList.remove('active');
+        document.getElementById('block1-screen').classList.add('active');
+    }
+
+    function checkP1() {
+        let current = 0;
+        for(let id in p1Ans) {
+            const val = document.getElementById(id).value.trim().toLowerCase();
+            if(val === p1Ans[id]) {
+                document.getElementById(id).style.borderColor = "var(--success)";
+                current++;
+            } else {
+                document.getElementById(id).style.borderColor = "var(--primary)";
+            }
+        }
+        p1Hits = current;
+        document.getElementById('hits1').innerText = p1Hits;
+    }
+
+    function goToBlock2() {
+        document.getElementById('block1-screen').classList.remove('active');
+        document.getElementById('block2-screen').classList.add('active');
+        renderQ();
+    }
+
+    function renderQ() {
+        const item = p2Data[currentQ];
+        document.getElementById('question-area').innerHTML = `
+            <div class="q-card">
+                <img src="${item.img}" class="q-img">
+                <p><strong>Order and use right form:</strong> ${item.q}</p>
+                <input type="text" id="p2_in" class="text-input-full" oninput="checkP2Live()">
+            </div>`;
+        document.getElementById('btn-next-q').style.display = currentQ < 8 ? 'inline-block' : 'none';
+        document.getElementById('btn-finish').style.display = currentQ === 8 ? 'inline-block' : 'none';
+    }
+
+    function checkP2Live() {
+        const val = document.getElementById('p2_in').value.trim().toLowerCase().replace(/[.]/g, "");
+        const correct = val === p2Data[currentQ].a;
+        document.getElementById('p2_in').style.borderColor = correct ? "var(--success)" : "var(--primary)";
+        p2Results[currentQ] = correct;
+        updateTotal();
+    }
+
+    function updateTotal() {
+        const p2Count = p2Results.filter(r => r).length;
+        document.getElementById('hits_total').innerText = p1Hits + p2Count;
+    }
+
+    function nextQuestionB2() {
+        currentQ++;
+        renderQ();
+    }
+
+    function finishAll() {
+        const hits = parseInt(document.getElementById('hits_total').innerText);
+        const grade = Math.round((hits / 20) * 100);
+        document.getElementById('block2-screen').classList.remove('active');
+        document.getElementById('final-screen').classList.add('active');
+        document.getElementById('final-grade').innerText = grade + "%";
+        document.getElementById('stats-text').innerText = `Aciertos: ${hits} de 20`;
+        const u = document.getElementById('userName').value;
+        const msg = `Hola Rafael, soy ${u}. Mi puntaje en Present Simple & Frequency es: ${grade}%`;
+        document.getElementById('wa-link').href = `https://wa.me/51990171277?text=${encodeURIComponent(msg)}`;
+    }
+</script>
+</body>
+</html>
