@@ -14,7 +14,7 @@
 * [Verb be conversations](https://englissbs.github.io/Englishsbs/Grammar/Basic/verb_be_conversations/)
 * [This - These](https://englissbs.github.io/Englishsbs/Grammar/Basic/This_These/)
 * [There - Prepositions](https://englissbs.github.io/Englishsbs/Grammar/Basic/There_prep_01/)
-* [Present Simple Questions 01](https://englissbs.github.io/Englishsbs/Grammar/Basic/Pre_simple_ques_01/)
+* [Present Simple Mixed 01](https://englissbs.github.io/Englishsbs/Grammar/Basic/Pre_simple_mix_01/)
 * [Present Simple Mixed 01](https://englissbs.github.io/Englishsbs/Grammar/Basic/Pre_simple_mix_01/)
 * [Present Simple 03](https://englissbs.github.io/Englishsbs/Grammar/Basic/pres_simp_03/)
 * [Present Simple 04](https://englissbs.github.io/Englishsbs/Grammar/Basic/pres_simp_04/)
