@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Step by Step - Verb to Be</title>
+    <style>
+        :root { --primary: #002d72; --secondary: #c8102e; --success: #28a745; --danger: #dc3545; --bg: #f4f4f9; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; max-width: 750px; width: 100%; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; }
+        .logo { width: 300px; margin-bottom: 20px; }
+        .screen { display: none; }
+        .active { display: block; }
+        .btn { background: var(--primary); color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; width: 90%; margin-top: 10px; transition: 0.3s; text-decoration: none; display: inline-block; }
+        .btn:hover { background: var(--secondary); }
+        .question-text { text-align: left; color: var(--primary); font-size: 1.25em; margin: 15px 0; line-height: 1.5; }
+        .option { display: block; width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #eee; border-radius: 8px; cursor: pointer; text-align: left; background: white; font-size: 1em; transition: 0.2s; }
+        .selected-correct { border-color: var(--success) !important; background: #d4edda !important; color: #155724; font-weight: bold; }
+        .selected-incorrect { border-color: var(--danger) !important; background: #f8d7da !important; color: #721c24; font-weight: bold; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; text-align: left; font-weight: 500; border-left: 5px solid; }
+        .feedback.correct { background: #d4edda; color: #155724; border-color: var(--success); }
+        .feedback.incorrect { background: #fff3cd; color: #856404; border-color: #ffc107; }
+        .grade-box { background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0; border: 1px solid #ddd; }
+        .grade-num { font-size: 3em; color: var(--primary); font-weight: bold; }
+        .text-input { width: 90%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 5px; font-size: 1.1em; }
+        .exercise-img { width: 100%; max-width: 400px; border-radius: 10px; margin-bottom: 10px; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo-container"><img src="assets/logo.jpg" alt="English Step by Step" class="logo"></div>
+    
+    <div id="welcome-screen" class="screen active">
+        <h2>BIENVENIDO</h2>
+        <p>Aprende Inglés paso a paso con <strong>Rafael</strong>.</p>
+        <input type="text" id="userName" placeholder="Nombre completo" class="text-input">
+        <input type="email" id="userEmail" placeholder="Tu correo electrónico" class="text-input">
+        <div style="font-size: 0.85em; text-align: center; margin: 20px 5%; color: #555; line-height: 1.5;">
+            <input type="checkbox" id="legalConsent"> 
+            <label for="legalConsent">Acepto el tratamiento de mis datos personales y autorizo el envío de información sobre Lives en TikTok y YouTube.</label>
+        </div>
+        <button class="btn" onclick="startQuiz()">EMPEZAR PRÁCTICA</button>
+    </div>
+
+    <div id="quiz-screen" class="screen">
+        <div id="progress" style="text-align: right; color: #666; font-size: 0.9em; margin-bottom: 10px;"></div>
+        <div id="exercise-area"></div>
+        <div id="feedback-area" class="feedback"></div>
+        <button id="next-btn" class="btn" style="display:none;" onclick="nextQuestion()">Siguiente Ejercicio</button>
+    </div>
+
+    <div id="final-screen" class="screen">
+        <h2>¡Terminaste, <span id="display-name"></span>!</h2>
+        <div class="grade-box">
+            <p>Tu calificación final:</p>
+            <div id="final-grade" class="grade-num"></div>
+            <p id="stats-text"></p>
+        </div>
+        <a id="wa-link" href="#" class="btn" style="background:#25d366;" target="_blank">Enviar resultados a Rafael</a>
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
+            <a href="https://www.tiktok.com/@englishsbs.peru" target="_blank" class="btn" style="background:#000; width: 45%;">TikTok</a>
+            <a href="https://www.youtube.com/@Englishsbs_peru" target="_blank" class="btn" style="background:#FF0000; width: 45%;">YouTube</a>
+        </div>
+        <button class="btn" style="background: #666;" onclick="location.reload()">Volver a realizar la práctica</button>
+        <a href="https://englissbs.github.io/Englishsbs/" class="btn" style="background: #444;">Regresar al inicio</a>
+    </div>
+</div>
+
+<script>
+    const positives = ["¡Muy bien hecho, sigue adelante!", "¡Veo que estás progresando, así se hace!", "¡Excelente!", "¡Fantástico trabajo!"];
+    const supports = ["Creo que necesitas revisar un poquito más este punto, ¡tú puedes!", "No te preocupes, el error es parte del aprendizaje.", "Casi lo tienes, dale otra mirada."];
+
+    const questions = [
+        // BLOQUE 1: 8 OPCIÓN MÚLTIPLE (Verb to Be)
+        {n:"Ex. 1", img:"assets/weather.jpg", type:"choice", q:"The weather _____ great today.", options:[{t:"is", c:true}, {t:"am", c:false}, {t:"are", c:false}]},
+        {n:"Ex. 2", img:"assets/doctor.jpg", type:"choice", q:"I __________ not a doctor.", options:[{t:"am", c:true}, {t:"is", c:false}, {t:"are", c:false}]},
+        {n:"Ex. 3", img:"assets/bag.jpg", type:"choice", q:"This bag __________ very heavy.", options:[{t:"is", c:true}, {t:"am", c:false}, {t:"are", c:false}]},
+        {n:"Ex. 4", img:"assets/newbags.jpg", type:"choice", q:"These bags __________ very new.", options:[{t:"are", c:true}, {t:"is", c:false}, {t:"am", c:false}]},
+        {n:"Ex. 5", img:"assets/andre.jpg", type:"choice", q:"Look! There __________ Andre.", options:[{t:"is", c:true}, {t:"am", c:false}, {t:"are", c:false}]},
+        {n:"Ex. 6", img:"assets/soccer.jpg", type:"choice", q:"My brother and I __________ good soccer players.", options:[{t:"are", c:true}, {t:"is", c:false}, {t:"am", c:false}]},
+        {n:"Ex. 7", img:"assets/children.jpg", type:"choice", q:"Amy’s children __________ at school.", options:[{t:"are", c:true}, {t:"is", c:false}, {t:"am", c:false}]},
+        {n:"Ex. 8", img:"assets/nurse.jpg", type:"choice", q:"My sister __________ a nurse.", options:[{t:"is", c:true}, {t:"am", c:false}, {t:"are", c:false}]},
+
+        // BLOQUE 2: 8 COMPLETAR (Pronoun + be)
+        {n:"Ex. 9", type:"text", inst:"Use a pronoun and 'be' (e.g., He is):", q:"My brother is sick. __________ in bed now.", accepted:["he is", "he's"]},
+        {n:"Ex. 10", type:"text", inst:"Use a pronoun and 'be':", q:"I'm not thirsty, but __________ hungry.", accepted:["i am", "i'm"]},
+        {n:"Ex. 11", type:"text", inst:"Use a pronoun and 'be':", q:"Mr. Alvarez is a very old man. __________ 88.", accepted:["he is", "he's"]},
+        {n:"Ex. 12", type:"text", inst:"Use a pronoun and 'be':", q:"These new pens aren’t beautiful, but __________ expensive.", accepted:["they are", "they're"]},
+        {n:"Ex. 13", type:"text", inst:"Use a pronoun and 'be':", q:"The weather is nice today. __________ warm and sunny.", accepted:["it is", "it's"]},
+        {n:"Ex. 14", type:"text", inst:"Use a pronoun and 'be':", q:"'__________ late.' 'No, I'm not. I'm early!'", accepted:["you are", "you're"]},
+        {n:"Ex. 15", type:"text", inst:"Use a pronoun and 'be':", q:"My dad isn’t at home. __________ at work.", accepted:["he is", "he's"]},
+        {n:"Ex. 16", type:"text", inst:"Use a pronoun and 'be':", q:"'__________ your tablet.' 'Oh, thank you very much.'", accepted:["it is", "it's"]}
+    ];
+
+    let current = 0, hits = 0;
+
+    function startQuiz() {
+        const u = document.getElementById('userName').value;
+        const e = document.getElementById('userEmail').value;
+        if(!u || !e || !document.getElementById('legalConsent').checked) return alert("Completa tus datos y acepta los términos.");
+        document.getElementById('display-name').innerText = u;
+        document.getElementById('welcome-screen').classList.remove('active');
+        document.getElementById('quiz-screen').classList.add('active');
+        show();
+    }
+
+    function show() {
+        const q = questions[current];
+        const area = document.getElementById('exercise-area');
+        area.innerHTML = '';
+        document.getElementById('feedback-area').style.display = 'none';
+        document.getElementById('next-btn').style.display = 'none';
+        document.getElementById('progress').innerText = `Exercise ${current+1} of ${questions.length}`;
+
+        if (q.type === "choice") {
+            area.innerHTML = `<img src="${q.img}" class="exercise-img"><h3 class="question-text">${q.q}</h3><div id="opts"></div>`;
+            const shuffled = [...q.options].sort(() => Math.random() - 0.5); // ALEATORIEDAD SBS
+            shuffled.forEach(o => {
+                const b = document.createElement('button'); b.className = 'option'; b.innerText = o.t;
+                b.onclick = (e) => validateChoice(o.c, e.target);
+                document.getElementById('opts').appendChild(b);
+            });
+        } else {
+            area.innerHTML = `<h3 style="text-align:left; color:#666; font-size:0.9em;">${q.inst}</h3><h3 class="question-text">${q.q}</h3><input type="text" id="user-input" class="text-input" placeholder="Type here..."><br><button class="btn" onclick="validateText()">VERIFY</button>`;
+        }
+    }
+
+    function validateChoice(ok, el) {
+        const f = document.getElementById('feedback-area');
+        f.innerText = ok ? positives[Math.floor(Math.random()*positives.length)] : supports[Math.floor(Math.random()*supports.length)];
+        f.className = ok ? "feedback correct" : "feedback incorrect";
+        f.style.display = 'block';
+        if(ok) { el.classList.add('selected-correct'); hits++; } else { el.classList.add('selected-incorrect'); }
+        document.querySelectorAll('.option').forEach(b => b.style.pointerEvents = 'none');
+        document.getElementById('next-btn').style.display = 'block';
+    }
+
+    function validateText() {
+        const val = document.getElementById('user-input').value.trim().toLowerCase();
+        const q = questions[current];
+        const ok = q.accepted.some(a => a === val);
+        const f = document.getElementById('feedback-area');
+        f.innerText = ok ? positives[Math.floor(Math.random()*positives.length)] : supports[Math.floor(Math.random()*supports.length)];
+        f.className = ok ? "feedback correct" : "feedback incorrect";
+        f.style.display = 'block';
+        if(ok) hits++;
+        document.getElementById('next-btn').style.display = 'block';
+    }
+
+    function nextQuestion() { current++; if(current < questions.length) show(); else finish(); }
+
+    function finish() {
+        let grade = Math.round((hits / questions.length) * 100);
+        document.getElementById('quiz-screen').classList.remove('active');
+        document.getElementById('final-screen').classList.add('active');
+        document.getElementById('final-grade').innerText = grade + "%";
+        document.getElementById('stats-text').innerText = `Aciertos: ${hits} de ${questions.length}`;
+        const u = document.getElementById('userName').value;
+        const msg = `Hola Rafael, soy ${u}. Mi puntaje en Verb to Be es: ${grade}%`;
+        document.getElementById('wa-link').href = `https://wa.me/51990171277?text=${encodeURIComponent(msg)}`; // WhatsApp SBS
+    }
+</script>
+</body>
+</html>
