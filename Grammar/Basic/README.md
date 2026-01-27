@@ -14,5 +14,9 @@
 * [Verb be conversations](https://englissbs.github.io/Englishsbs/Grammar/Basic/verb_be_conversations/)
 * [Verb be mixed](https://englissbs.github.io/Englishsbs/Grammar/Basic/verb_be_mixed/)
 * [Verb be questions](https://englissbs.github.io/Englishsbs/Grammar/Basic/verb_be_questions/)
+* [Present Simple 03](https://englissbs.github.io/Englishsbs/Grammar/Basic/pre_simp_03/)
+* [Present Simple 04](https://englissbs.github.io/Englishsbs/Grammar/Basic/pre_simp_04/)
+* [Present Continuous 03](https://englissbs.github.io/Englishsbs/Grammar/Basic/pres_cont_03/)
+* [Present Continuous 04](https://englissbs.github.io/Englishsbs/Grammar/Basic/pres_cont_04/)
  
 [← Regresar al inicio](https://englissbs.github.io/Englishsbs/)
