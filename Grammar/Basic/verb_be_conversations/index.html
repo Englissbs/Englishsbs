@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Step by Step - Verb to Be Practice</title>
+    <style>
+        :root { --primary: #002d72; --secondary: #c8102e; --success: #28a745; --danger: #dc3545; --bg: #f4f4f9; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; max-width: 850px; width: 100%; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; position: relative; }
+        .logo { width: 300px; margin-bottom: 20px; }
+        .screen { display: none; }
+        .active { display: block; }
+        .btn { background: var(--primary); color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; width: 90%; margin-top: 10px; transition: 0.3s; text-decoration: none; display: inline-block; }
+        .btn:hover { background: var(--secondary); }
+        .text-input { width: 90%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 5px; font-size: 1.1em; }
+        
+        /* Contador en tiempo real */
+        .live-counter { position: sticky; top: 0; background: var(--primary); color: white; padding: 10px 20px; border-radius: 0 0 10px 10px; font-weight: bold; font-size: 0.9em; margin-bottom: 20px; z-index: 100; display: inline-block; }
+
+        /* Bloque 1 Styles */
+        .block-exercise { text-align: left; background: #f0f4f8; padding: 20px; border-radius: 10px; border-left: 5px solid var(--primary); line-height: 2.5; margin-bottom: 30px; font-size: 1.1em; }
+        .inline-input { border: 2px solid var(--primary); padding: 4px; width: 80px; border-radius: 4px; text-align: center; font-weight: bold; font-family: inherit; transition: 0.3s; }
+        
+        /* Bloque 2 Styles */
+        .matching-table { width: 100%; border-collapse: separate; border-spacing: 0 10px; margin-top: 20px; }
+        .col-q { text-align: left; width: 40%; padding: 12px; background: #eef2f7; border-radius: 8px 0 0 8px; font-size: 0.95em; }
+        .col-input { width: 15%; padding: 10px; text-align: center; background: #fff; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; }
+        .col-a { text-align: left; width: 45%; padding: 12px; background: #f9f9f9; border-radius: 0 8px 8px 0; font-size: 0.95em; border-left: 1px dashed #ccc; }
+        .letter-input { width: 45px; height: 45px; border: 2px solid var(--primary); border-radius: 50%; text-align: center; font-weight: bold; font-size: 1.1em; text-transform: uppercase; transition: 0.3s; }
+
+        .grade-box { background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0; border: 1px solid #ddd; }
+        .grade-num { font-size: 3em; color: var(--primary); font-weight: bold; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo-container"><img src="assets/logo.jpg" alt="English Step by Step" class="logo"></div>
+    
+    <div id="welcome-screen" class="screen active">
+        <h2>BIENVENIDO</h2>
+        <p>Aprende Inglés paso a paso con <strong>Rafael</strong>.</p>
+        <input type="text" id="userName" placeholder="Nombre completo" class="text-input">
+        <input type="email" id="userEmail" placeholder="Tu correo electrónico" class="text-input">
+        <div style="font-size: 0.85em; text-align: center; margin: 20px 5%; color: #555; line-height: 1.5;">
+            <input type="checkbox" id="legalConsent"> 
+            <label for="legalConsent">Acepto el tratamiento de mis datos personales y autorizo el envío de información sobre Lives en TikTok y YouTube.</label>
+        </div>
+        <button class="btn" onclick="goToBlock1()">EMPEZAR PRÁCTICA</button>
+    </div>
+
+    <div id="block1-screen" class="screen">
+        <div class="live-counter">Aciertos actuales: <span id="hits1">0</span> / 7</div>
+        <h3 style="color: var(--primary); text-align: left;">Part 1: Complete using "am", "is" or "are"</h3>
+        <div class="block-exercise">
+            1. Where <input type="text" id="q1" class="inline-input" oninput="liveCheckP1()"> your sister? Is she at home?<br>
+            2. "Where <input type="text" id="q2" class="inline-input" oninput="liveCheckP1()"> you from?" "Lima, Perú."<br>
+            3. "What color <input type="text" id="q3" class="inline-input" oninput="liveCheckP1()"> your shoes?" "They’re brown."<br>
+            4. "How old <input type="text" id="q4" class="inline-input" oninput="liveCheckP1()"> Miss Vega?" "She's 21."<br>
+            5. "How <input type="text" id="q5" class="inline-input" oninput="liveCheckP1()"> your parents?" "They're fine, thanks."<br>
+            6. This laptop is nice. How much <input type="text" id="q6" class="inline-input" oninput="liveCheckP1()"> it?<br>
+            7. This hotel is really good. Why <input type="text" id="q7" class="inline-input" oninput="liveCheckP1()"> it so cheap?
+        </div>
+        <button class="btn" onclick="goToBlock2()">SIGUIENTE BLOQUE</button>
+    </div>
+
+    <div id="block2-screen" class="screen">
+        <div class="live-counter">Aciertos totales: <span id="hits2">0</span> / 16</div>
+        <h3 style="color: var(--primary); text-align: left;">Part 2: Match the questions with the answers</h3>
+        <p style="text-align: left; font-size: 0.9em; color: #666;">Write the correct letter (A-I) in the circle.</p>
+        <table class="matching-table" id="matching-table">
+            </table>
+        <button class="btn" onclick="validateFinal()">VERIFICAR Y TERMINAR</button>
+    </div>
+
+    <div id="final-screen" class="screen">
+        <h2>¡Terminaste, <span id="display-name"></span>!</h2>
+        <div class="grade-box">
+            <p>Tu calificación final:</p>
+            <div id="final-grade" class="grade-num"></div>
+            <p id="stats-text"></p>
+        </div>
+        <a id="wa-link" href="#" class="btn" style="background:#25d366;" target="_blank">Enviar resultados a Rafael</a>
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
+            <a href="https://www.tiktok.com/@englishsbs.peru" target="_blank" class="btn" style="background:#000; width: 45%;">TikTok</a>
+            <a href="https://www.youtube.com/@Englishsbs_peru" target="_blank" class="btn" style="background:#FF0000; width: 45%;">YouTube</a>
+        </div>
+        <button class="btn" style="background: #666;" onclick="location.reload()">Volver a realizar la práctica</button>
+        <a href="https://englissbs.github.io/Englishsbs/" class="btn" style="background: #444;">Regresar al inicio</a>
+    </div>
+</div>
+
+<script>
+    const part1Answers = { q1: "is", q2: "are", q3: "are", q4: "is", q5: "are", q6: "is", q7: "is" };
+    const correctMap = { 1:"G", 2:"F", 3:"H", 4:"C", 5:"A", 6:"E", 7:"B", 8:"I", 9:"D" };
+    const matchingData = [
+        { n: 1, q: "Where's the camera?", a: "Toronto.", letter: "A" },
+        { n: 2, q: "Is your car blue?", a: "No, I'm not.", letter: "B" },
+        { n: 3, q: "Is Nicole from London?", a: "Yes, you are.", letter: "C" },
+        { n: 4, q: "Am I late?", a: "My sister.", letter: "D" },
+        { n: 5, q: "Where's Megan from?", a: "Black.", letter: "E" },
+        { n: 6, q: "What color is your bag?", a: "No, it's black.", letter: "F" },
+        { n: 7, q: "Are you hungry?", a: "In your bag.", letter: "G" },
+        { n: 8, q: "How is Christopher?", a: "No, she's American.", letter: "H" },
+        { n: 9, q: "Who's that woman?", a: "Fine.", letter: "I" }
+    ];
+
+    let p1FinalHits = 0;
+
+    function goToBlock1() {
+        const u = document.getElementById('userName').value;
+        const e = document.getElementById('userEmail').value;
+        if(!u || !e || !document.getElementById('legalConsent').checked) return alert("Completa tus datos.");
+        document.getElementById('display-name').innerText = u;
+        switchScreen('welcome-screen', 'block1-screen');
+    }
+
+    function liveCheckP1() {
+        let currentHits = 0;
+        for(let key in part1Answers) {
+            const input = document.getElementById(key);
+            if(input.value.trim().toLowerCase() === part1Answers[key]) {
+                input.style.borderColor = "var(--success)";
+                currentHits++;
+            } else {
+                input.style.borderColor = "var(--primary)";
+            }
+        }
+        document.getElementById('hits1').innerText = currentHits;
+        p1FinalHits = currentHits;
+    }
+
+    function goToBlock2() {
+        renderMatching();
+        switchScreen('block1-screen', 'block2-screen');
+        document.getElementById('hits2').innerText = p1FinalHits;
+    }
+
+    function liveCheckP2() {
+        let p2Hits = 0;
+        for(let id in correctMap) {
+            const input = document.getElementById('m' + id);
+            if(input.value.trim().toUpperCase() === correctMap[id]) {
+                p2Hits++;
+            }
+        }
+        document.getElementById('hits2').innerText = p1FinalHits + p2Hits;
+    }
+
+    function switchScreen(oldID, newID) {
+        document.getElementById(oldID).classList.remove('active');
+        document.getElementById(newID).classList.add('active');
+        window.scrollTo(0,0);
+    }
+
+    function renderMatching() {
+        const table = document.getElementById('matching-table');
+        table.innerHTML = "";
+        matchingData.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `<td class="col-q">${item.n}. ${item.q}</td>
+                             <td class="col-input"><input type="text" id="m${item.n}" maxlength="1" class="letter-input" oninput="liveCheckP2()"></td>
+                             <td class="col-a"><b>${item.letter}.</b> ${item.a}</td>`;
+            table.appendChild(row);
+        });
+    }
+
+    function validateFinal() {
+        let p2Hits = 0;
+        for(let id in correctMap) {
+            const input = document.getElementById('m' + id);
+            if(input.value.trim().toUpperCase() === correctMap[id]) {
+                input.style.backgroundColor = "#d4edda";
+                p2Hits++;
+            } else {
+                input.style.backgroundColor = "#f8d7da";
+            }
+        }
+
+        const totalHits = p1FinalHits + p2Hits;
+        const totalQ = 16;
+        const grade = Math.round((totalHits / totalQ) * 100);
+        
+        document.getElementById('block2-screen').classList.remove('active');
+        document.getElementById('final-screen').classList.add('active');
+        document.getElementById('final-grade').innerText = grade + "%";
+        document.getElementById('stats-text').innerText = `Aciertos: ${totalHits} de ${totalQ}`;
+        const u = document.getElementById('userName').value;
+        const msg = `Hola Rafael, soy ${u}. Mi puntaje final es: ${grade}%`;
+        document.getElementById('wa-link').href = `https://wa.me/51990171277?text=${encodeURIComponent(msg)}`;
+    }
+</script>
+</body>
+</html>
