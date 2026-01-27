@@ -16,8 +16,8 @@
 * [There - Prepositions](https://englissbs.github.io/Englishsbs/Grammar/Basic/There_prep_01/)
 * [Present Simple Questions 01](https://englissbs.github.io/Englishsbs/Grammar/Basic/Pre_simple_ques_01/)
 * [Present Simple Mixed 01](https://englissbs.github.io/Englishsbs/Grammar/Basic/Pre_simple_mix_01/)
-* [Present Simple 03](https://englissbs.github.io/Englishsbs/Grammar/Basic/pre_simp_03/)
-* [Present Simple 04](https://englissbs.github.io/Englishsbs/Grammar/Basic/pre_simp_04/)
+* [Present Simple 03](https://englissbs.github.io/Englishsbs/Grammar/Basic/pres_simp_03/)
+* [Present Simple 04](https://englissbs.github.io/Englishsbs/Grammar/Basic/pres_simp_04/)
 
  
 [← Regresar al inicio](https://englissbs.github.io/Englishsbs/)
