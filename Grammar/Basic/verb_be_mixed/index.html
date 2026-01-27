@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Step by Step - Mixed Practice 03 Corrected</title>
+    <style>
+        :root { --primary: #002d72; --secondary: #c8102e; --success: #28a745; --danger: #dc3545; --bg: #f4f4f9; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; max-width: 850px; width: 100%; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; position: relative; }
+        .welcome-container { max-width: 65%; margin: 0 auto; }
+        .logo { width: 300px; margin-bottom: 20px; }
+        .screen { display: none; }
+        .active { display: block; }
+        .btn { background: var(--primary); color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; width: 90%; margin-top: 10px; transition: 0.3s; text-decoration: none; display: inline-block; }
+        .btn:hover { background: var(--secondary); }
+        .live-counter { position: sticky; top: 0; background: var(--primary); color: white; padding: 10px 20px; border-radius: 0 0 10px 10px; font-weight: bold; font-size: 0.9em; margin-bottom: 20px; z-index: 100; display: inline-block; }
+        .exercise-box { text-align: left; background: #f0f4f8; padding: 25px; border-radius: 10px; border-left: 5px solid var(--primary); margin-bottom: 20px; line-height: 1.8; }
+        .text-input { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #ddd; border-radius: 8px; font-size: 1.1em; box-sizing: border-box; transition: 0.3s; }
+        .select-input { border: 2px solid var(--primary); padding: 5px; border-radius: 5px; font-weight: bold; font-family: inherit; font-size: 1em; background: #fff; }
+        .q-row { margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #eee; text-align: left; }
+        .grade-box { background: #f8f9fa; padding: 20px; border-radius: 10px; border: 1px solid #ddd; margin: 20px 0; }
+        .grade-num { font-size: 3.5em; color: var(--primary); font-weight: bold; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo-container"><img src="assets/logo.jpg" alt="English Step by Step" class="logo"></div>
+    
+    <div id="welcome-screen" class="screen active">
+        <div class="welcome-container">
+            <h2>BIENVENIDO</h2>
+            <p>Aprende Inglés paso a paso con <strong>Rafael</strong>.</p>
+            <input type="text" id="userName" placeholder="Nombre completo" class="text-input">
+            <input type="email" id="userEmail" placeholder="Tu correo electrónico" class="text-input">
+            <div style="font-size: 0.85em; text-align: center; margin: 20px 0; color: #555;">
+                <input type="checkbox" id="legalConsent"> 
+                <label for="legalConsent">Acepto el tratamiento de datos y autorizo información sobre Lives en TikTok y YouTube.</label>
+            </div>
+            <button class="btn" onclick="startApp()">EMPEZAR PRÁCTICA</button>
+        </div>
+    </div>
+
+    <div id="block1-screen" class="screen">
+        <div class="live-counter">Aciertos: <span id="hits1">0</span> / 8</div>
+        <h3 style="color: var(--primary); text-align: left;">Part 1: Write the questions</h3>
+        <div id="b1-content"></div>
+        <button class="btn" onclick="goToBlock2()">Siguiente Bloque</button>
+    </div>
+
+    <div id="block2-screen" class="screen">
+        <div class="live-counter">Aciertos totales: <span id="hits_total">0</span> / 19</div>
+        <h3 style="color: var(--primary); text-align: left;">Part 2: Choose the correct option</h3>
+        <div class="exercise-box" id="b2-content"></div>
+        <button class="btn" onclick="finishAll()">FINALIZAR Y ENVIAR</button>
+    </div>
+
+    <div id="final-screen" class="screen">
+        <h2>¡Buen trabajo, <span id="display-name"></span>!</h2>
+        <div class="grade-box">
+            <p>Tu calificación final:</p>
+            <div id="final-grade" class="grade-num"></div>
+            <p id="stats-text"></p>
+        </div>
+        <a id="wa-link" href="#" class="btn" style="background:#25d366;" target="_blank">Enviar resultados a Rafael</a>
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
+            <a href="https://www.tiktok.com/@englishsbs.peru" target="_blank" class="btn" style="background:#000; width: 45%;">TikTok</a>
+            <a href="https://www.youtube.com/@Englishsbs_peru" target="_blank" class="btn" style="background:#FF0000; width: 45%;">YouTube</a>
+        </div>
+        <button class="btn" style="background: #666;" onclick="location.reload()">Reintentar</button>
+    </div>
+</div>
+
+<script>
+    // Corrección de respuestas para preguntas 6 y 7
+    const b1Data = [
+        { p: "(Peruvian?)", b: "No, I'm Mexican.", a: ["are you peruvian", "are you peruvian?"] },
+        { p: "(how old?)", b: "I'm 15.", a: ["how old are you", "how old are you?"] },
+        { p: "(a teacher?)", b: "No, I'm a student.", a: ["are you a teacher", "are you a teacher?"] },
+        { p: "(married?)", b: "No, I’m not.", a: ["are you married", "are you married?"] },
+        { p: "(father a lawyer?)", b: "No, he’s an accountant.", a: ["is your father a lawyer", "is your father a lawyer?"] },
+        { p: "(Thalia from?)", b: "She's from Mexico.", a: ["where is thalia from", "where's thalia from", "where is thalia from?", "where's thalia from?"] },
+        { p: "(her name?)", b: "Luana.", a: ["what is her name", "what's her name", "what is her name?", "what's her name?"] },
+        { p: "(how old?)", b: "She's 27.", a: ["how old is she", "how old is she?"] }
+    ];
+
+    const b2Data = [
+        { q: "______ your name Eric?", opt: ["Am", "Is", "Are"], ans: "Is" },
+        { q: "I ______ from Arequipa, Peru.", opt: ["am", "is", "are"], ans: "am" },
+        { q: "Where ______ the children?", opt: ["am", "is", "are"], ans: "are" },
+        { q: "______ you hungry?", opt: ["Am", "Is", "Are"], ans: "Are" },
+        { q: "My mochila ______ new.", opt: ["am", "is", "are"], ans: "is" },
+        { q: "Pedro and I ______ friends.", opt: ["am", "is", "are"], ans: "are" },
+        { q: "______ she a nurse?", opt: ["Am", "Is", "Are"], ans: "Is" },
+        { q: "How ______ your parents?", opt: ["am", "is", "are"], ans: "are" },
+        { q: "It ______ very cold today.", opt: ["am", "is", "are"], ans: "is" },
+        { q: "______ I late?", opt: ["Am", "Is", "Are"], ans: "Am" },
+        { q: "They ______ not at school.", opt: ["am", "is", "are"], ans: "are" }
+    ];
+
+    let b1Hits = 0;
+
+    function startApp() {
+        const u = document.getElementById('userName').value;
+        const e = document.getElementById('userEmail').value;
+        if(!u || !e || !document.getElementById('legalConsent').checked) return alert("Completa tus datos.");
+        document.getElementById('display-name').innerText = u;
+        document.getElementById('welcome-screen').classList.remove('active');
+        document.getElementById('block1-screen').classList.add('active');
+        renderB1();
+    }
+
+    function renderB1() {
+        const container = document.getElementById('b1-content');
+        container.innerHTML = "";
+        b1Data.forEach((item, i) => {
+            const div = document.createElement('div');
+            div.className = "exercise-box";
+            div.innerHTML = `A: <b>${item.p}</b> <input type="text" id="b1_in_${i}" class="text-input" placeholder="Write the question..." oninput="checkB1()"> <br>B: ${item.b}`;
+            container.appendChild(div);
+        });
+    }
+
+    function checkB1() {
+        let currentHits = 0;
+        b1Data.forEach((item, i) => {
+            const val = document.getElementById(`b1_in_${i}`).value.trim().toLowerCase();
+            if(item.a.some(ans => ans.toLowerCase() === val)) {
+                document.getElementById(`b1_in_${i}`).style.borderColor = "var(--success)";
+                currentHits++;
+            } else {
+                document.getElementById(`b1_in_${i}`).style.borderColor = "var(--primary)";
+            }
+        });
+        b1Hits = currentHits;
+        document.getElementById('hits1').innerText = b1Hits;
+    }
+
+    function goToBlock2() {
+        document.getElementById('block1-screen').classList.remove('active');
+        document.getElementById('block2-screen').classList.add('active');
+        renderB2();
+    }
+
+    function renderB2() {
+        const container = document.getElementById('b2-content');
+        container.innerHTML = "";
+        b2Data.forEach((item, i) => {
+            const row = document.createElement('div');
+            row.className = "q-row";
+            const opts = [...item.opt].sort(() => Math.random() - 0.5);
+            let selectHTML = `<select id="b2_sel_${i}" class="select-input" onchange="checkTotal()"><option value="">---</option>`;
+            opts.forEach(o => selectHTML += `<option value="${o}">${o}</option>`);
+            selectHTML += `</select>`;
+            row.innerHTML = `${i+1}. ${item.q.replace("______", selectHTML)}`;
+            container.appendChild(row);
+        });
+        checkTotal();
+    }
+
+    function checkTotal() {
+        let b2Hits = 0;
+        b2Data.forEach((item, i) => {
+            const val = document.getElementById(`b2_sel_${i}`).value;
+            if(val === item.ans) b2Hits++;
+        });
+        document.getElementById('hits_total').innerText = b1Hits + b2Hits;
+    }
+
+    function finishAll() {
+        const totalHits = parseInt(document.getElementById('hits_total').innerText);
+        const grade = Math.round((totalHits / 19) * 100);
+        document.getElementById('block2-screen').classList.remove('active');
+        document.getElementById('final-screen').classList.add('active');
+        document.getElementById('final-grade').innerText = grade + "%";
+        document.getElementById('stats-text').innerText = `Aciertos: ${totalHits} de 19`;
+        const u = document.getElementById('userName').value;
+        const msg = `Hola Rafael, soy ${u}. Mi puntaje en Mixed Practice 03 es: ${grade}%`;
+        document.getElementById('wa-link').href = `https://wa.me/51990171277?text=${encodeURIComponent(msg)}`;
+    }
+</script>
+</body>
+</html>
