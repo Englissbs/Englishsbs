@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Step by Step - Question Practice</title>
+    <style>
+        :root { --primary: #002d72; --secondary: #c8102e; --success: #28a745; --danger: #dc3545; --bg: #f4f4f9; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; max-width: 850px; width: 100%; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; position: relative; }
+        
+        /* Pantalla de inicio 30% más angosta */
+        .welcome-container { max-width: 65%; margin: 0 auto; }
+        
+        .logo { width: 300px; margin-bottom: 20px; }
+        .screen { display: none; }
+        .active { display: block; }
+        .btn { background: var(--primary); color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; width: 90%; margin-top: 10px; transition: 0.3s; text-decoration: none; display: inline-block; }
+        .btn:hover { background: var(--secondary); }
+        
+        /* Contador Real-Time */
+        .live-counter { position: sticky; top: 0; background: var(--primary); color: white; padding: 10px 20px; border-radius: 0 0 10px 10px; font-weight: bold; font-size: 0.9em; margin-bottom: 20px; z-index: 100; display: inline-block; }
+
+        .exercise-box { text-align: left; background: #f0f4f8; padding: 25px; border-radius: 10px; border-left: 5px solid var(--primary); margin-bottom: 20px; }
+        .question-text { font-size: 1.2em; color: var(--primary); margin-bottom: 15px; display: block; }
+        .text-input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 8px; font-size: 1.1em; box-sizing: border-box; transition: 0.3s; }
+        
+        .cloze-paragraph { text-align: left; line-height: 2.5; font-size: 1.1em; background: #fff; padding: 20px; border: 1px solid #eee; border-radius: 10px; }
+        .inline-input { border: 2px solid var(--primary); padding: 4px; width: 110px; border-radius: 4px; text-align: center; font-weight: bold; }
+
+        .grade-box { background: #f8f9fa; padding: 20px; border-radius: 10px; border: 1px solid #ddd; margin: 20px 0; }
+        .grade-num { font-size: 3.5em; color: var(--primary); font-weight: bold; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo-container"><img src="assets/logo.jpg" alt="English Step by Step" class="logo"></div>
+    
+    <div id="welcome-screen" class="screen active">
+        <div class="welcome-container">
+            <h2>BIENVENIDO</h2>
+            <p>Aprende Inglés paso a paso con <strong>Rafael</strong>.</p>
+            <input type="text" id="userName" placeholder="Nombre completo" class="text-input">
+            <input type="email" id="userEmail" placeholder="Tu correo electrónico" class="text-input">
+            <div style="font-size: 0.85em; text-align: center; margin: 20px 0; color: #555;">
+                <input type="checkbox" id="legalConsent"> 
+                <label for="legalConsent">Acepto el tratamiento de datos y autorizo información sobre Lives en TikTok y YouTube.</label>
+            </div>
+            <button class="btn" onclick="startApp()">EMPEZAR PRÁCTICA</button>
+        </div>
+    </div>
+
+    <div id="block1-screen" class="screen">
+        <div class="live-counter">Aciertos actuales: <span id="hits1">0</span> / 9</div>
+        <div id="b1-content"></div>
+        <button id="b1-next" class="btn" onclick="nextB1()">Siguiente Pregunta</button>
+        <button id="b1-finish" class="btn" style="display:none;" onclick="goToBlock2()">Ir al Bloque 2</button>
+    </div>
+
+    <div id="block2-screen" class="screen">
+        <div class="live-counter">Aciertos totales: <span id="hits_total">0</span> / 16</div>
+        <h3 style="color: var(--primary); text-align: left;">Part 2: Complete the questions (What / Who / Where / How)</h3>
+        <div class="cloze-paragraph">
+            1. <b>How</b> are your children? → They're fine.<br>
+            2. <input type="text" id="c1" class="inline-input" oninput="liveCheckTotal()"> the bus stop? → At the end of the block.<br>
+            3. <input type="text" id="c2" class="inline-input" oninput="liveCheckTotal()"> your children? → They’re ten, six, and five.<br>
+            4. <input type="text" id="c3" class="inline-input" oninput="liveCheckTotal()"> these bananas? → $1.50 a kilo.<br>
+            5. <input type="text" id="c4" class="inline-input" oninput="liveCheckTotal()"> your favorite sport? → Soccer.<br>
+            6. <input type="text" id="c5" class="inline-input" oninput="liveCheckTotal()"> the woman in this photo? → That's my Mom.<br>
+            7. <input type="text" id="c6" class="inline-input" oninput="liveCheckTotal()"> your new teacher? → Mr. Ruiz.
+        </div>
+        <button class="btn" onclick="finishAll()">FINALIZAR Y ENVIAR</button>
+    </div>
+
+    <div id="final-screen" class="screen">
+        <h2>¡Excelente trabajo, <span id="display-name"></span>!</h2>
+        <div class="grade-box">
+            <p>Tu calificación final:</p>
+            <div id="final-grade" class="grade-num"></div>
+            <p id="stats-text"></p>
+        </div>
+        <a id="wa-link" href="#" class="btn" style="background:#25d366;" target="_blank">Enviar resultados a Rafael</a>
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
+            <a href="https://www.tiktok.com/@englishsbs.peru" target="_blank" class="btn" style="background:#000; width: 45%;">TikTok</a>
+            <a href="https://www.youtube.com/@Englishsbs_peru" target="_blank" class="btn" style="background:#FF0000; width: 45%;">YouTube</a>
+        </div>
+        <button class="btn" style="background: #666;" onclick="location.reload()">Volver a intentar</button>
+    </div>
+</div>
+
+<script>
+    const b1Data = [
+        { q: "(is / home / your mother)", a: ["is your mother at home", "is your mother home"] },
+        { q: "(your parents / are / how)", a: ["how are your parents"] },
+        { q: "(interesting / is / your job)", a: ["is your job interesting"] },
+        { q: "(the stores / are / open today)", a: ["are the stores open today"] },
+        { q: "(from / where / you / are)", a: ["where are you from"] },
+        { q: "(interested in sports / you / are)", a: ["are you interested in sports"] },
+        { q: "(is / near here / the train station)", a: ["is the train station near here"] },
+        { q: "(at school / are / your children)", a: ["are your children at school"] },
+        { q: "(you / are / late / why)", a: ["why are you late"] }
+    ];
+
+    const b2Answers = { c1: "where is", c2: "how old are", c3: "how much are", c4: "what is", c5: "who is", c6: "who is" };
+    
+    let currentB1 = 0;
+    let b1Hits = 0;
+    let b1Results = [];
+
+    function startApp() {
+        const u = document.getElementById('userName').value;
+        const e = document.getElementById('userEmail').value;
+        if(!u || !e || !document.getElementById('legalConsent').checked) return alert("Por favor completa tus datos.");
+        document.getElementById('display-name').innerText = u;
+        document.getElementById('welcome-screen').classList.remove('active');
+        document.getElementById('block1-screen').classList.add('active');
+        showB1();
+    }
+
+    function showB1() {
+        const item = b1Data[currentB1];
+        const area = document.getElementById('b1-content');
+        area.innerHTML = `
+            <div class="exercise-box">
+                <span class="question-text">${item.q}</span>
+                <input type="text" id="b1-input" class="text-input" placeholder="Type the question..." oninput="checkB1Live()">
+            </div>`;
+        if(currentB1 === b1Data.length - 1) {
+            document.getElementById('b1-next').style.display = 'none';
+            document.getElementById('b1-finish').style.display = 'inline-block';
+        }
+    }
+
+    function checkB1Live() {
+        const val = document.getElementById('b1-input').value.trim().toLowerCase().replace(/[?]/g, "");
+        const correct = b1Data[currentB1].a.some(ans => ans.toLowerCase() === val);
+        document.getElementById('b1-input').style.borderColor = correct ? "var(--success)" : "var(--primary)";
+        b1Results[currentB1] = correct;
+        updateHits1();
+    }
+
+    function updateHits1() {
+        b1Hits = b1Results.filter(r => r === true).length;
+        document.getElementById('hits1').innerText = b1Hits;
+    }
+
+    function nextB1() {
+        currentB1++;
+        showB1();
+    }
+
+    function goToBlock2() {
+        document.getElementById('block1-screen').classList.remove('active');
+        document.getElementById('block2-screen').classList.add('active');
+        liveCheckTotal();
+    }
+
+    function liveCheckTotal() {
+        let b2Hits = 0;
+        for(let id in b2Answers) {
+            const val = document.getElementById(id).value.trim().toLowerCase();
+            const correct = (val === b2Answers[id] || val === b2Answers[id].replace(" is", "'s"));
+            if(correct) {
+                document.getElementById(id).style.borderColor = "var(--success)";
+                b2Hits++;
+            } else {
+                document.getElementById(id).style.borderColor = "var(--primary)";
+            }
+        }
+        document.getElementById('hits_total').innerText = b1Hits + b2Hits;
+    }
+
+    function finishAll() {
+        const totalHits = parseInt(document.getElementById('hits_total').innerText);
+        const grade = Math.round((totalHits / 16) * 100);
+        document.getElementById('block2-screen').classList.remove('active');
+        document.getElementById('final-screen').classList.add('active');
+        document.getElementById('final-grade').innerText = grade + "%";
+        document.getElementById('stats-text').innerText = `Aciertos: ${totalHits} de 16`;
+        const u = document.getElementById('userName').value;
+        const msg = `Hola Rafael, soy ${u}. Mi puntaje final es: ${grade}%`;
+        document.getElementById('wa-link').href = `https://wa.me/51990171277?text=${encodeURIComponent(msg)}`;
+    }
+</script>
+</body>
+</html>
