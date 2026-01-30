@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index.html</title>
+    <style>
+        :root { --primary: #002d72; --secondary: #c8102e; --success: #28a745; --danger: #dc3545; --bg: #f4f4f9; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; max-width: 850px; width: 100%; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; position: relative; }
+        .welcome-container { max-width: 65%; margin: 0 auto; }
+        .logo { width: 300px; margin-bottom: 20px; }
+        .screen { display: none; }
+        .active { display: block; }
+        .btn { background: var(--primary); color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; width: 90%; margin-top: 10px; transition: 0.3s; text-decoration: none; display: inline-block; border-bottom: 4px solid rgba(0,0,0,0.2); }
+        .btn:hover { background: var(--secondary); transform: translateY(-2px); }
+        .live-counter { position: sticky; top: 0; background: var(--primary); color: white; padding: 10px 20px; border-radius: 0 0 10px 10px; font-weight: bold; font-size: 0.9em; margin-bottom: 20px; z-index: 100; display: inline-block; }
+        .exercise-box { text-align: left; background: #f0f4f8; padding: 25px; border-radius: 10px; border-left: 5px solid var(--primary); margin-bottom: 20px; line-height: 2.5; }
+        .inline-input { border: 2px solid var(--primary); padding: 5px; width: 110px; border-radius: 4px; font-weight: bold; font-family: inherit; text-align: center; }
+        .full-input { border: 2px solid var(--primary); padding: 8px; width: 92%; border-radius: 4px; font-weight: bold; margin-bottom: 10px; }
+        .exercise-img { width: 100%; max-width: 300px; border-radius: 8px; display: block; margin: 15px auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .grade-box { background: #f8f9fa; padding: 20px; border-radius: 10px; border: 1px solid #ddd; margin: 20px 0; }
+        .grade-num { font-size: 3.5em; color: var(--primary); font-weight: bold; }
+        .text-input-welcome { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 5px; }
+        .social-btn { width: 45%; margin: 5px; padding: 12px; border-radius: 5px; color: white; text-decoration: none; font-weight: bold; display: inline-block; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo-container"><img src="assets/logo.jpg" alt="English Step by Step" class="logo"></div>
+    
+    <div id="welcome-screen" class="screen active">
+        <div class="welcome-container">
+            <h2>BIENVENIDO</h2>
+            <p>Aprende Inglés paso a paso con <strong>Rafael</strong>.</p>
+            <input type="text" id="userName" placeholder="Nombre completo" class="text-input-welcome">
+            <input type="email" id="userEmail" placeholder="Tu correo electrónico" class="text-input-welcome">
+            <div style="font-size: 0.85em; text-align: center; margin: 20px 0; color: #555;">
+                <input type="checkbox" id="legalConsent"> 
+                <label for="legalConsent">Acepto el tratamiento de datos y autorizo el envío de información sobre <strong>Lives en TikTok y YouTube</strong>.</label>
+            </div>
+            <button class="btn" onclick="startApp()">EMPEZAR PRÁCTICA</button>
+        </div>
+    </div>
+
+    <div id="block1-screen" class="screen">
+        <div class="live-counter">Aciertos Totales: <span class="hits-display">0</span> / 19</div>
+        <h3 style="color: var(--primary); text-align: left;">Part 1: This / These + Is / Are</h3>
+        <div class="exercise-box">
+            1. <input type="text" id="p1_1a" class="inline-input" oninput="validateGlobal()"> <input type="text" id="p1_1b" class="inline-input" oninput="validateGlobal()"> my apple.<br>
+            2. <input type="text" id="p1_2a" class="inline-input" oninput="validateGlobal()"> <input type="text" id="p1_2b" class="inline-input" oninput="validateGlobal()"> your books.<br>
+            3. Look! <input type="text" id="p1_3a" class="inline-input" oninput="validateGlobal()"> <input type="text" id="p1_3b" class="inline-input" oninput="validateGlobal()"> a new car.<br>
+            4. <input type="text" id="p1_4a" class="inline-input" oninput="validateGlobal()"> <input type="text" id="p1_4b" class="inline-input" oninput="validateGlobal()"> my brothers.<br>
+            5. Is <input type="text" id="p1_5a" class="inline-input" oninput="validateGlobal()"> your cell phone?<br>
+            6. <input type="text" id="p1_6a" class="inline-input" oninput="validateGlobal()"> <input type="text" id="p1_6b" class="inline-input" oninput="validateGlobal()"> very expensive watches.<br>
+            7. <input type="text" id="p1_7a" class="inline-input" oninput="validateGlobal()"> <input type="text" id="p1_7b" class="inline-input" oninput="validateGlobal()"> my favorite teacher.
+        </div>
+        <button class="btn" onclick="nextBlock(2)">SIGUIENTE BLOQUE</button>
+    </div>
+
+    <div id="block2-screen" class="screen">
+        <div class="live-counter">Aciertos Totales: <span class="hits-display">0</span> / 19</div>
+        <h3 style="color: var(--primary); text-align: left;">Part 2: Prepositions of Place</h3>
+        <div class="exercise-box">
+            <img src="assets/cat_box.jpg" class="exercise-img">
+            1. The cat is <input type="text" id="p2_1" class="inline-input" oninput="validateGlobal()"> the box.
+        </div>
+        <div class="exercise-box">
+            <img src="assets/dog_house.jpg" class="exercise-img">
+            2. The dog is <input type="text" id="p2_2" class="inline-input" style="width:140px;" oninput="validateGlobal()"> the house.
+        </div>
+        <div class="exercise-box">
+            <img src="assets/ball_chair.jpg" class="exercise-img">
+            3. The ball is <input type="text" id="p2_3" class="inline-input" oninput="validateGlobal()"> the chair.
+        </div>
+        <div class="exercise-box">
+            <img src="assets/keys_books.jpg" class="exercise-img">
+            4. The keys are <input type="text" id="p2_4" class="inline-input" oninput="validateGlobal()"> the books.
+        </div>
+        <div class="exercise-box">
+            <img src="assets/lamp_bed.jpg" class="exercise-img">
+            5. The lamp is <input type="text" id="p2_5" class="inline-input" oninput="validateGlobal()"> the bed.
+        </div>
+        <div class="exercise-box">
+            <img src="assets/shoes_table.jpg" class="exercise-img">
+            6. The shoes are <input type="text" id="p2_6" class="inline-input" oninput="validateGlobal()"> the table.
+        </div>
+        <div class="exercise-box">
+            <img src="assets/apple_table.jpg" class="exercise-img">
+            7. The apple is <input type="text" id="p2_7" class="inline-input" oninput="validateGlobal()"> the table.
+        </div>
+        <button class="btn" onclick="nextBlock(3)">SIGUIENTE BLOQUE</button>
+    </div>
+
+    <div id="block3-screen" class="screen">
+        <div class="live-counter">Aciertos Totales: <span class="hits-display">0</span> / 19</div>
+        <h3 style="color: var(--primary); text-align: left;">Part 3: Where is it? Complete the phrases</h3>
+        <div class="exercise-box">
+            <img src="assets/books_box.jpg" class="exercise-img">
+            1. Where are the books? <br><input type="text" id="p3_1" class="full-input" oninput="validateGlobal()"><br>
+            <img src="assets/boy_tree.jpg" class="exercise-img">
+            2. Where is the boy? <br><input type="text" id="p3_2" class="full-input" oninput="validateGlobal()"><br>
+            <img src="assets/car_school.jpg" class="exercise-img">
+            3. Where is the car? <br><input type="text" id="p3_3" class="full-input" oninput="validateGlobal()"><br>
+            <img src="assets/phone_sofa.jpg" class="exercise-img">
+            4. Where is the phone? <br><input type="text" id="p3_4" class="full-input" oninput="validateGlobal()"><br>
+            <img src="assets/pencil_notebooks.jpg" class="exercise-img">
+            5. Where is the pencil? <br><input type="text" id="p3_5" class="full-input" oninput="validateGlobal()">
+        </div>
+        <button class="btn" onclick="finishAll()">FINALIZAR Y ENVIAR</button>
+    </div>
+
+    <div id="final-screen" class="screen">
+        <h2>¡Excelente trabajo, <span id="display-name"></span>!</h2>
+        <div class="grade-box">
+            <div id="final-grade" class="grade-num"></div>
+            <p id="stats-text"></p>
+        </div>
+        <a id="wa-link" href="#" class="btn" style="background:#25d366; border-bottom: 4px solid #128C7E;" target="_blank">Enviar resultados a Rafael</a>
+        <div style="margin-top: 15px;">
+            <a href="https://www.tiktok.com/@englishsbs.peru" target="_blank" class="social-btn" style="background:#000;">Síguenos en TikTok</a>
+            <a href="https://www.youtube.com/@Englishsbs_peru" target="_blank" class="social-btn" style="background:#FF0000;">Síguenos en YouTube</a>
+        </div>
+        <button class="btn" style="background: #666; margin-top: 15px;" onclick="location.reload()">Reintentar</button>
+        <a href="https://englissbs.github.io/Englishsbs/" class="btn" style="background: #444; margin-top: 10px;">Regresar al Inicio</a>
+    </div>
+</div>
+
+<script>
+    const allAns = {
+        p1_1a: ["this"], p1_1b: ["is"], p1_2a: ["these"], p1_2b: ["are"], p1_3a: ["this"], p1_3b: ["is"], p1_4a: ["these"], p1_4b: ["are"], p1_5a: ["this"], p1_6a: ["these"], p1_6b: ["are"], p1_7a: ["this"], p1_7b: ["is"],
+        p2_1: ["in"], p2_2: ["in front of"], p2_3: ["behind"], p2_4: ["between"], p2_5: ["next to"], p2_6: ["under"], p2_7: ["on"],
+        p3_1: ["in the box", "they are in the box", "they're in the box", "the books are in the box"],
+        p3_2: ["under the tree", "he is under the tree", "he's under the tree", "the boy is under the tree"],
+        p3_3: ["in front of the school", "it is in front of the school", "it's in front of the school", "the car is in front of the school"],
+        p3_4: ["on the sofa", "it is on the sofa", "it's on the sofa", "the phone is on the sofa"],
+        p3_5: ["between the notebooks", "it is between the notebooks", "it's between the notebooks", "the pencil is between the notebooks"]
+    };
+
+    function startApp() {
+        const u = document.getElementById('userName').value;
+        const c = document.getElementById('legalConsent').checked;
+        if(!u || !c) return alert("Por favor, ingresa tu nombre y acepta los términos.");
+        document.getElementById('display-name').innerText = u;
+        document.getElementById('welcome-screen').classList.remove('active');
+        document.getElementById('block1-screen').classList.add('active');
+    }
+
+    function validateGlobal() {
+        let hits = 0;
+        for(let id in allAns) {
+            const input = document.getElementById(id);
+            if(!input) continue;
+            const val = input.value.trim().toLowerCase().replace(/[.]/g, "");
+            if(allAns[id].includes(val)) {
+                input.style.borderColor = "var(--success)";
+                hits++;
+            } else {
+                input.style.borderColor = "var(--primary)";
+            }
+        }
+        document.querySelectorAll('.hits-display').forEach(display => { display.innerText = hits; });
+        return hits;
+    }
+
+    function nextBlock(n) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('block'+n+'-screen').classList.add('active');
+        window.scrollTo(0,0);
+        validateGlobal();
+    }
+
+    function finishAll() {
+        let total = validateGlobal();
+        let grade = Math.round((total / 19) * 100);
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('final-screen').classList.add('active');
+        document.getElementById('final-grade').innerText = grade + "%";
+        document.getElementById('stats-text').innerText = `Aciertos totales: ${total} de 19.`;
+        const msg = `Hola Rafael, soy ${document.getElementById('userName').value}. Mi puntaje final es: ${grade}%`;
+        document.getElementById('wa-link').href = `https://wa.me/51990171277?text=${encodeURIComponent(msg)}`;
+    }
+</script>
+</body>
+</html>
