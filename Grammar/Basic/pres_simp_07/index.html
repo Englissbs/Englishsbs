@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Step by Step - Mixed Practice</title>
+    <style>
+        :root { --primary: #002d72; --secondary: #c8102e; --success: #28a745; --danger: #dc3545; --bg: #f4f4f9; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; max-width: 850px; width: 100%; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; position: relative; }
+        .welcome-container { max-width: 65%; margin: 0 auto; }
+        .logo { width: 300px; margin-bottom: 20px; }
+        .screen { display: none; }
+        .active { display: block; }
+        .btn { background: var(--primary); color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; width: 90%; margin-top: 10px; transition: 0.3s; text-decoration: none; display: inline-block; }
+        .btn:hover { background: var(--secondary); }
+        .live-counter { position: sticky; top: 0; background: var(--primary); color: white; padding: 10px 20px; border-radius: 0 0 10px 10px; font-weight: bold; font-size: 0.9em; margin-bottom: 20px; z-index: 100; display: inline-block; }
+        .exercise-box { text-align: left; background: #f0f4f8; padding: 25px; border-radius: 10px; border-left: 5px solid var(--primary); margin-bottom: 20px; line-height: 2.5; }
+        .verb-list { background: #fff; padding: 10px; border: 1px dashed var(--primary); border-radius: 8px; margin-bottom: 15px; font-weight: bold; color: var(--secondary); text-align: center; }
+        .inline-input { border: 2px solid var(--primary); padding: 5px; width: 160px; border-radius: 4px; font-weight: bold; font-family: inherit; }
+        .grade-box { background: #f8f9fa; padding: 20px; border-radius: 10px; border: 1px solid #ddd; margin: 20px 0; }
+        .grade-num { font-size: 3.5em; color: var(--primary); font-weight: bold; }
+        .text-input-welcome { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 5px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo-container"><img src="assets/logo.jpg" alt="English Step by Step" class="logo"></div>
+    
+    <div id="welcome-screen" class="screen active">
+        <div class="welcome-container">
+            <h2>BIENVENIDO</h2>
+            <p>Aprende Inglés paso a paso con <strong>Rafael</strong>.</p>
+            <input type="text" id="userName" placeholder="Nombre completo" class="text-input-welcome">
+            <input type="email" id="userEmail" placeholder="Tu correo electrónico" class="text-input-welcome">
+            <div style="font-size: 0.85em; text-align: center; margin: 20px 0; color: #555;">
+                <input type="checkbox" id="legalConsent"> 
+                <label for="legalConsent">Acepto el tratamiento de datos y autorizo información sobre Lives en TikTok y YouTube.</label>
+            </div>
+            <button class="btn" onclick="startApp()">EMPEZAR PRÁCTICA</button>
+        </div>
+    </div>
+
+    <div id="block1-screen" class="screen">
+        <div class="live-counter">Aciertos: <span id="hits1">0</span> / 10</div>
+        <h3 style="color: var(--primary); text-align: left;">Part 1: Complete with the negative form</h3>
+        <div class="verb-list">cost — go — know — rain — see — use — wear — drink — speak — play</div>
+        <div class="exercise-box">
+            1. The weather here is usually nice. It <input type="text" id="p1_1" class="inline-input" oninput="validateBlock(1)"> a lot in this city.<br>
+            2. Andy has a car, but he <input type="text" id="p1_2" class="inline-input" oninput="validateBlock(1)"> it very often.<br>
+            3. Dan and his friends like movies, but they <input type="text" id="p1_3" class="inline-input" oninput="validateBlock(1)"> to the movies very often.<br>
+            4. Amanda is married, but she <input type="text" id="p1_4" class="inline-input" oninput="validateBlock(1)"> a ring.<br>
+            5. I <input type="text" id="p1_5" class="inline-input" oninput="validateBlock(1)"> much about medicine. I'm not interested in it.<br>
+            6. Tanta Restaurant isn't expensive. It <input type="text" id="p1_6" class="inline-input" oninput="validateBlock(1)"> much to eat there.<br>
+            7. Anna lives near us, but we <input type="text" id="p1_7" class="inline-input" oninput="validateBlock(1)"> her very often.<br>
+            8. My baby is very healthy. He <input type="text" id="p1_8" class="inline-input" oninput="validateBlock(1)"> soda or sugar.<br>
+            9. They are from Italy, but they <input type="text" id="p1_9" class="inline-input" oninput="validateBlock(1)"> English at home.<br>
+            10. My cousin is very busy. He <input type="text" id="p1_10" class="inline-input" oninput="validateBlock(1)"> video games during the week.
+        </div>
+        <button class="btn" onclick="nextBlock(2)">SIGUIENTE BLOQUE</button>
+    </div>
+
+    <div id="block2-screen" class="screen">
+        <div class="live-counter">Aciertos totales: <span id="hits_total">0</span> / 20</div>
+        <h3 style="color: var(--primary); text-align: left;">Part 2: Affirmative or Negative? Put the verb in the correct form</h3>
+        <div class="exercise-box">
+            1. Laura <input type="text" id="p2_1" class="inline-input" oninput="validateBlock(2)"> four languages - English, Japanese, French, and Portuguese. (speak)<br>
+            2. I <input type="text" id="p2_2" class="inline-input" oninput="validateBlock(2)"> my job. It's very boring. (like)<br>
+            3. "Where's Susan?" "I'm sorry. I <input type="text" id="p2_3" class="inline-input" oninput="validateBlock(2)">." (know)<br>
+            4. My teacher is a very quiet person. She <input type="text" id="p2_4" class="inline-input" oninput="validateBlock(2)"> very much. (talk)<br>
+            5. My wife <input type="text" id="p2_5" class="inline-input" oninput="validateBlock(2)"> a lot of coffee. It's her favorite drink. (drink)<br>
+            6. That's impossible! I <input type="text" id="p2_6" class="inline-input" oninput="validateBlock(2)"> it! (believe)<br>
+            7. Wow, it’s a very beautiful photo. I <input type="text" id="p2_7" class="inline-input" oninput="validateBlock(2)"> it a lot. (like)<br>
+            8. Oscar is a vegetarian. He <input type="text" id="p2_8" class="inline-input" oninput="validateBlock(2)"> meat. (eat)<br>
+            9. My brother is a great cook. He <input type="text" id="p2_9" class="inline-input" oninput="validateBlock(2)"> delicious pasta. (make)<br>
+            10. I'm very tired. I <input type="text" id="p2_10" class="inline-input" oninput="validateBlock(2)"> to go out tonight. (want)
+        </div>
+        <button class="btn" onclick="finishAll()">FINALIZAR Y ENVIAR</button>
+    </div>
+
+    <div id="final-screen" class="screen">
+        <h2>¡Buen trabajo, <span id="display-name"></span>!</h2>
+        <div class="grade-box">
+            <div id="final-grade" class="grade-num"></div>
+            <p id="stats-text"></p>
+        </div>
+        <a id="wa-link" href="#" class="btn" style="background:#25d366;" target="_blank">Enviar resultados a Rafael</a>
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
+            <a href="https://www.tiktok.com/@englishsbs.peru" target="_blank" class="btn" style="background:#000; width: 45%;">TikTok</a>
+            <a href="https://www.youtube.com/@Englishsbs_peru" target="_blank" class="btn" style="background:#FF0000; width: 45%;">YouTube</a>
+        </div>
+        <button class="btn" style="background: #666;" onclick="location.reload()">Reintentar</button>
+        <a href="https://englissbs.github.io/Englishsbs/" class="btn" style="background: #444;">Regresar al Inicio</a>
+    </div>
+</div>
+
+<script>
+    const ans = {
+        b1: { p1_1: ["doesn't rain", "does not rain"], p1_2: ["doesn't use", "does not use"], p1_3: ["don't go", "do not go"], p1_4: ["doesn't wear", "does not wear"], p1_5: ["don't know", "do not know"], p1_6: ["doesn't cost", "does not cost"], p1_7: ["don't see", "do not see"], p1_8: ["doesn't drink", "does not drink"], p1_9: ["don't speak", "do not speak"], p1_10: ["doesn't play", "does not play"] },
+        b2: { p2_1: ["speaks"], p2_2: ["don't like", "do not like"], p2_3: ["don't know", "do not know"], p2_4: ["doesn't talk", "does not talk"], p2_5: ["drinks"], p2_6: ["don't believe", "do not believe"], p2_7: ["like"], p2_8: ["doesn't eat", "does not eat"], p2_9: ["makes"], p2_10: ["don't want", "do not want"] }
+    };
+    let h1 = 0;
+
+    function startApp() {
+        const u = document.getElementById('userName').value;
+        if(!u || !document.getElementById('legalConsent').checked) return alert("Completa tus datos.");
+        document.getElementById('display-name').innerText = u;
+        document.getElementById('welcome-screen').classList.remove('active');
+        document.getElementById('block1-screen').classList.add('active');
+    }
+
+    function validateBlock(b) {
+        let hits = 0;
+        let currentAns = ans['b'+b];
+        for(let id in currentAns) {
+            const input = document.getElementById(id);
+            const val = input.value.trim().toLowerCase().replace(/[.]/g, "");
+            if(currentAns[id].includes(val)) {
+                input.style.borderColor = "var(--success)";
+                hits++;
+            } else {
+                input.style.borderColor = "var(--primary)";
+            }
+        }
+        if(b === 1) { h1 = hits; document.getElementById('hits1').innerText = hits; }
+        else { document.getElementById('hits_total').innerText = h1 + hits; }
+        return hits;
+    }
+
+    function nextBlock(n) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('block'+n+'-screen').classList.add('active');
+        validateBlock(n);
+    }
+
+    function finishAll() {
+        let h2 = validateBlock(2);
+        let total = h1 + h2;
+        let grade = Math.round((total / 20) * 100);
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('final-screen').classList.add('active');
+        document.getElementById('final-grade').innerText = grade + "%";
+        document.getElementById('stats-text').innerText = `Aciertos totales: ${total} de 20.`;
+        const msg = `Hola Rafael, soy ${document.getElementById('userName').value}. Mi puntaje en Mixed Practice es: ${grade}%`;
+        document.getElementById('wa-link').href = `https://wa.me/51990171277?text=${encodeURIComponent(msg)}`;
+    }
+</script>
+</body>
+</html>
