@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Step by Step - Adverbs of Frequency v2</title>
+    <style>
+        :root { --primary: #002d72; --secondary: #c8102e; --success: #28a745; --danger: #dc3545; --bg: #f4f4f9; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; max-width: 850px; width: 100%; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; position: relative; }
+        .welcome-container { max-width: 65%; margin: 0 auto; }
+        .logo { width: 300px; margin-bottom: 20px; }
+        .screen { display: none; }
+        .active { display: block; }
+        .btn { background: var(--primary); color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; width: 90%; margin-top: 10px; transition: 0.3s; text-decoration: none; display: inline-block; }
+        .btn:hover { background: var(--secondary); }
+        .live-counter { position: sticky; top: 0; background: var(--primary); color: white; padding: 10px 20px; border-radius: 0 0 10px 10px; font-weight: bold; font-size: 0.9em; margin-bottom: 20px; z-index: 100; display: inline-block; }
+        .exercise-box { text-align: left; background: #f0f4f8; padding: 25px; border-radius: 10px; border-left: 5px solid var(--primary); margin-bottom: 20px; line-height: 2.5; }
+        .word-bank { background: #fff; padding: 10px; border: 1px dashed var(--secondary); border-radius: 8px; margin-bottom: 15px; font-weight: bold; color: var(--secondary); text-align: center; }
+        .inline-input { border: 2px solid var(--primary); padding: 5px; width: 150px; border-radius: 4px; font-weight: bold; font-family: inherit; }
+        .full-input { border: 2px solid var(--primary); padding: 8px; width: 90%; border-radius: 4px; font-weight: bold; margin-bottom: 10px; }
+        .grade-box { background: #f8f9fa; padding: 20px; border-radius: 10px; border: 1px solid #ddd; margin: 20px 0; }
+        .grade-num { font-size: 3.5em; color: var(--primary); font-weight: bold; }
+        .text-input-welcome { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 5px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo-container"><img src="assets/logo.jpg" alt="English Step by Step" class="logo"></div>
+    
+    <div id="welcome-screen" class="screen active">
+        <div class="welcome-container">
+            <h2>BIENVENIDO</h2>
+            <p>Aprende Inglés paso a paso con <strong>Rafael</strong>.</p>
+            <input type="text" id="userName" placeholder="Nombre completo" class="text-input-welcome">
+            <input type="email" id="userEmail" placeholder="Tu correo electrónico" class="text-input-welcome">
+            <div style="font-size: 0.85em; text-align: center; margin: 20px 0; color: #555;">
+                <input type="checkbox" id="legalConsent"> 
+                <label for="legalConsent">Acepto el tratamiento de datos y autorizo información sobre Lives en TikTok y YouTube.</label>
+            </div>
+            <button class="btn" onclick="startApp()">EMPEZAR PRÁCTICA</button>
+        </div>
+    </div>
+
+    <div id="block1-screen" class="screen">
+        <div class="live-counter">Aciertos Totales: <span class="hits-display">0</span> / 20</div>
+        <h3 style="color: var(--primary); text-align: left;">Part 1: Order the adverbs (100% to 0%)</h3>
+        <div class="word-bank">sometimes — never — always — hardly ever — often — usually</div>
+        <div class="exercise-box">
+            100% — <input type="text" id="p1_1" class="inline-input" oninput="validateGlobal()"><br>
+            90% — <input type="text" id="p1_2" class="inline-input" oninput="validateGlobal()"><br>
+            70% — <input type="text" id="p1_3" class="inline-input" oninput="validateGlobal()"><br>
+            50% — <input type="text" id="p1_4" class="inline-input" oninput="validateGlobal()"><br>
+            10% — <input type="text" id="p1_5" class="inline-input" oninput="validateGlobal()"><br>
+            0% — <input type="text" id="p1_6" class="inline-input" oninput="validateGlobal()">
+        </div>
+        <button class="btn" onclick="nextBlock(2)">SIGUIENTE BLOQUE</button>
+    </div>
+
+    <div id="block2-screen" class="screen">
+        <div class="live-counter">Aciertos Totales: <span class="hits-display">0</span> / 20</div>
+        <h3 style="color: var(--primary); text-align: left;">Part 2: Rewrite in the correct position</h3>
+        <div class="exercise-box">
+            1. I am late for class. (always)<br><input type="text" id="p2_1" class="full-input" oninput="validateGlobal()"><br>
+            2. She drinks coffee in the morning. (usually)<br><input type="text" id="p2_2" class="full-input" oninput="validateGlobal()"><br>
+            3. They don't go to the park. (often)<br><input type="text" id="p2_3" class="full-input" oninput="validateGlobal()"><br>
+            4. My father is tired after work. (sometimes)<br><input type="text" id="p2_4" class="full-input" oninput="validateGlobal()"><br>
+            5. We don't watch horror movies. (hardly ever)<br><input type="text" id="p2_5" class="full-input" oninput="validateGlobal()"><br>
+            6. He studies on Sundays. (never)<br><input type="text" id="p2_6" class="full-input" oninput="validateGlobal()"><br>
+            7. I don't eat fast food. (usually)<br><input type="text" id="p2_7" class="full-input" oninput="validateGlobal()">
+        </div>
+        <button class="btn" onclick="nextBlock(3)">SIGUIENTE BLOQUE</button>
+    </div>
+
+    <div id="block3-screen" class="screen">
+        <div class="live-counter">Aciertos Totales: <span class="hits-display">0</span> / 20</div>
+        <h3 style="color: var(--primary); text-align: left;">Part 3: Unscramble the sentences</h3>
+        <div class="exercise-box">
+            1. usually / at / 7:00 / I / up / wake<br><input type="text" id="p3_1" class="full-input" oninput="validateGlobal()"><br>
+            2. is / never / she / work / for / late<br><input type="text" id="p3_2" class="full-input" oninput="validateGlobal()"><br>
+            3. often / you / do / travel / ?<br><input type="text" id="p3_3" class="full-input" oninput="validateGlobal()"><br>
+            4. doesn't / he / sometimes / breakfast / eat<br><input type="text" id="p3_4" class="full-input" oninput="validateGlobal()"><br>
+            5. are / they / happy / always / together<br><input type="text" id="p3_5" class="full-input" oninput="validateGlobal()"><br>
+            6. does / often / she / exercise / ?<br><input type="text" id="p3_6" class="full-input" oninput="validateGlobal()"><br>
+            7. we / go / hardly ever / camping<br><input type="text" id="p3_7" class="full-input" oninput="validateGlobal()">
+        </div>
+        <button class="btn" onclick="finishAll()">FINALIZAR Y ENVIAR</button>
+    </div>
+
+    <div id="final-screen" class="screen">
+        <h2>¡Excelente, <span id="display-name"></span>!</h2>
+        <div class="grade-box">
+            <div id="final-grade" class="grade-num"></div>
+            <p id="stats-text"></p>
+        </div>
+        <a id="wa-link" href="#" class="btn" style="background:#25d366;" target="_blank">Enviar resultados a Rafael</a>
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
+            <a href="https://www.tiktok.com/@englishsbs.peru" target="_blank" class="btn" style="background:#000; width: 45%;">TikTok</a>
+            <a href="https://www.youtube.com/@Englishsbs_peru" target="_blank" class="btn" style="background:#FF0000; width: 45%;">YouTube</a>
+        </div>
+        <button class="btn" style="background: #666;" onclick="location.reload()">Reintentar</button>
+    </div>
+</div>
+
+<script>
+    const allAns = {
+        p1_1: ["always"], p1_2: ["usually"], p1_3: ["often"], p1_4: ["sometimes"], p1_5: ["hardly ever"], p1_6: ["never"],
+        p2_1: ["i am always late for class", "i'm always late for class"], 
+        p2_2: ["she usually drinks coffee in the morning", "usually she drinks coffee in the morning", "she drinks coffee in the morning usually"], 
+        p2_3: ["they don't often go to the park", "they do not often go to the park"], 
+        p2_4: ["my father is sometimes tired after work", "sometimes my father is tired after work", "my father is tired after work sometimes"], 
+        p2_5: ["we hardly ever watch horror movies"], 
+        p2_6: ["he never studies on sundays"], 
+        p2_7: ["i don't usually eat fast food", "usually i don't eat fast food", "i don't eat fast food usually", "i do not usually eat fast food"],
+        p3_1: ["i usually wake up at 7:00", "i usually wake up at 7", "usually i wake up at 7:00", "i wake up at 7:00 usually"], 
+        p3_2: ["she is never late for work", "she's never late for work"], 
+        p3_3: ["do you often travel", "do you often travel?"], 
+        p3_4: ["he sometimes doesn't eat breakfast", "sometimes he doesn't eat breakfast", "he doesn't eat breakfast sometimes"], 
+        p3_5: ["they are always happy together", "they're always happy together"], 
+        p3_6: ["does she often exercise", "does she often exercise?"], 
+        p3_7: ["we hardly ever go camping"]
+    };
+
+    function startApp() {
+        const u = document.getElementById('userName').value;
+        if(!u || !document.getElementById('legalConsent').checked) return alert("Completa tus datos.");
+        document.getElementById('display-name').innerText = u;
+        document.getElementById('welcome-screen').classList.remove('active');
+        document.getElementById('block1-screen').classList.add('active');
+    }
+
+    function validateGlobal() {
+        let hits = 0;
+        for(let id in allAns) {
+            const input = document.getElementById(id);
+            if(!input) continue;
+            const val = input.value.trim().toLowerCase().replace(/[.]/g, "");
+            if(allAns[id].includes(val)) {
+                input.style.borderColor = "var(--success)";
+                hits++;
+            } else {
+                input.style.borderColor = "var(--primary)";
+            }
+        }
+        document.querySelectorAll('.hits-display').forEach(display => {
+            display.innerText = hits;
+        });
+        return hits;
+    }
+
+    function nextBlock(n) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('block'+n+'-screen').classList.add('active');
+        validateGlobal();
+    }
+
+    function finishAll() {
+        let total = validateGlobal();
+        let grade = Math.round((total / 20) * 100);
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('final-screen').classList.add('active');
+        document.getElementById('final-grade').innerText = grade + "%";
+        document.getElementById('stats-text').innerText = `Lograste ${total} de 20 puntos. ¡Sigue así!`;
+        const msg = `Hola Rafael, soy ${document.getElementById('userName').value}. Mi nota acumulada es: ${grade}%`;
+        document.getElementById('wa-link').href = `https://wa.me/51990171277?text=${encodeURIComponent(msg)}`;
+    }
+</script>
+</body>
+</html>
