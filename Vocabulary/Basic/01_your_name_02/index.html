@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index.html</title>
+    <style>
+        :root { --primary: #002d72; --secondary: #c8102e; --success: #28a745; --danger: #dc3545; --bg: #f4f4f9; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; max-width: 850px; width: 100%; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; position: relative; }
+        .welcome-container { max-width: 65%; margin: 0 auto; }
+        .logo { width: 300px; margin-bottom: 20px; }
+        .screen { display: none; }
+        .active { display: block; }
+        .btn { background: var(--primary); color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; width: 90%; margin-top: 10px; transition: 0.3s; text-decoration: none; display: inline-block; border-bottom: 4px solid rgba(0,0,0,0.2); }
+        .btn:hover { background: var(--secondary); transform: translateY(-2px); }
+        .live-counter { position: sticky; top: 0; background: var(--primary); color: white; padding: 10px 20px; border-radius: 0 0 10px 10px; font-weight: bold; font-size: 0.9em; margin-bottom: 20px; z-index: 100; display: inline-block; }
+        .exercise-box { text-align: left; background: #f0f4f8; padding: 25px; border-radius: 10px; border-left: 5px solid var(--primary); margin-bottom: 20px; line-height: 2.5; }
+        .inline-input { border: 2px solid var(--primary); padding: 5px; width: 160px; border-radius: 4px; font-weight: bold; font-family: inherit; text-align: center; }
+        .exercise-img { width: 100%; max-width: 200px; border-radius: 8px; display: block; margin: 15px auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .grade-box { background: #f8f9fa; padding: 20px; border-radius: 10px; border: 1px solid #ddd; margin: 20px 0; }
+        .grade-num { font-size: 3.5em; color: var(--primary); font-weight: bold; }
+        .text-input-welcome { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 5px; }
+        .social-btn { width: 45%; margin: 5px; padding: 12px; border-radius: 5px; color: white; text-decoration: none; font-weight: bold; display: inline-block; font-size: 0.85em; }
+        .dialogue-line { margin-bottom: 10px; }
+        .speaker { font-weight: bold; color: var(--primary); margin-right: 5px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo-container"><img src="assets/logo.jpg" alt="English Step by Step" class="logo"></div>
+    
+    <div id="welcome-screen" class="screen active">
+        <div class="welcome-container">
+            <h2>HELLO AGAIN!</h2>
+            <input type="text" id="userName" placeholder="Nombre completo" class="text-input-welcome">
+            <input type="email" id="userEmail" placeholder="Tu correo electrónico" class="text-input-welcome">
+            <div style="font-size: 0.85em; text-align: center; margin: 20px 0; color: #555;">
+                <input type="checkbox" id="legalConsent"> 
+                <label for="legalConsent">Acepto el tratamiento de datos y autorizo el envío de información sobre <strong>Lives en TikTok y YouTube</strong>.</label>
+            </div>
+            <button class="btn" onclick="startApp()">START PRACTICE</button>
+        </div>
+    </div>
+
+    <div id="block1-screen" class="screen">
+        <div class="live-counter">Aciertos Totales: <span class="hits-display">0</span> / 12</div>
+        <h3 style="color: var(--primary); text-align: left;">1. Contact Information</h3>
+        <div class="exercise-box">
+            <div class="dialogue-line"><span class="speaker">A:</span> What's your phone <input type="text" id="p1_1" class="inline-input" oninput="validateGlobal()">?</div>
+            <div class="dialogue-line"><span class="speaker">B:</span> It's 555-1234.</div>
+            <div class="dialogue-line"><span class="speaker">A:</span> And your e-mail <input type="text" id="p1_2" class="inline-input" oninput="validateGlobal()">?</div>
+            <div class="dialogue-line"><span class="speaker">B:</span> It is rafael@email.com.</div>
+            <div class="dialogue-line"><span class="speaker">A:</span> How do you <input type="text" id="p1_3" class="inline-input" oninput="validateGlobal()"> your name?</div>
+            <div class="dialogue-line"><span class="speaker">B:</span> R-A-F-A-E-L.</div>
+            <div class="dialogue-line"><span class="speaker">A:</span> What is your last <input type="text" id="p1_4" class="inline-input" oninput="validateGlobal()">?</div>
+            <div class="dialogue-line"><span class="speaker">B:</span> It's Pimentel.</div>
+            <div class="dialogue-line"><span class="speaker">A:</span> <input type="text" id="p1_5" class="inline-input" oninput="validateGlobal()"> to meet you!</div>
+            <div class="dialogue-line"><span class="speaker">B:</span> Hello! Good <input type="text" id="p1_6" class="inline-input" oninput="validateGlobal()">. (8:00 PM)</div>
+        </div>
+        <button class="btn" onclick="nextBlock(2)">NEXT PART</button>
+    </div>
+
+    <div id="block2-screen" class="screen">
+        <div class="live-counter">Aciertos Totales: <span class="hits-display">0</span> / 12</div>
+        <h3 style="color: var(--primary); text-align: left;">2. Spelling & Greetings</h3>
+        <div class="exercise-box">
+            <img src="assets/abc.jpg" class="exercise-img" alt="ABC">
+            7. The <input type="text" id="p2_1" class="inline-input" oninput="validateGlobal()">.
+        </div>
+        <div class="exercise-box">
+            <img src="assets/phone_icon.jpg" class="exercise-img" alt="Phone">
+            8. Phone <input type="text" id="p2_2" class="inline-input" oninput="validateGlobal()">.
+        </div>
+        <div class="exercise-box">
+            <img src="assets/email_icon.jpg" class="exercise-img" alt="Email">
+            9. E-mail <input type="text" id="p2_3" class="inline-input" oninput="validateGlobal()">.
+        </div>
+        <div class="exercise-box">
+            <img src="assets/afternoon.jpg" class="exercise-img" alt="Afternoon">
+            10. Good <input type="text" id="p2_4" class="inline-input" oninput="validateGlobal()">.
+        </div>
+        <div class="exercise-box">
+            <img src="assets/night.jpg" class="exercise-img" alt="Night">
+            11. Good <input type="text" id="p2_5" class="inline-input" oninput="validateGlobal()">.
+        </div>
+        <div class="exercise-box">
+            <img src="assets/evening.jpg" class="exercise-img" alt="Evening">
+            12. Good <input type="text" id="p2_6" class="inline-input" oninput="validateGlobal()">.
+        </div>
+        <button class="btn" onclick="finishAll()">FINISH</button>
+    </div>
+
+    <div id="final-screen" class="screen">
+        <h2>Great job, <span id="display-name"></span>!</h2>
+        <div class="grade-box">
+            <div id="final-grade" class="grade-num"></div>
+            <p id="stats-text"></p>
+        </div>
+        <a id="wa-link" href="#" class="btn" style="background:#25d366; border-bottom: 4px solid #128C7E;" target="_blank">Enviar resultados a Rafael</a>
+        <div style="margin-top: 15px;">
+            <a href="https://www.tiktok.com/@englishsbs.peru" target="_blank" class="social-btn" style="background:#000;">Síguenos en TikTok</a>
+            <a href="https://www.youtube.com/@Englishsbs_peru" target="_blank" class="social-btn" style="background:#FF0000;">Síguenos en YouTube</a>
+        </div>
+        <button class="btn" style="background: #666; margin-top: 15px;" onclick="location.reload()">Reintentar</button>
+        <a href="https://englissbs.github.io/Englishsbs/" class="btn" style="background: #444; margin-top: 10px;">Regresar al Inicio</a>
+    </div>
+</div>
+
+<script>
+    const allAns = {
+        p1_1: ["number"], p1_2: ["address"], p1_3: ["spell"], p1_4: ["name"], p1_5: ["nice"], p1_6: ["evening"],
+        p2_1: ["alphabet"], p2_2: ["number"], p2_3: ["address"], p2_4: ["afternoon"], p2_5: ["night"], p2_6: ["evening"]
+    };
+
+    function startApp() {
+        const u = document.getElementById('userName').value;
+        const c = document.getElementById('legalConsent').checked;
+        if(!u || !c) return alert("Por favor, ingresa tu nombre y acepta los términos.");
+        document.getElementById('display-name').innerText = u;
+        document.getElementById('welcome-screen').classList.remove('active');
+        document.getElementById('block1-screen').classList.add('active');
+    }
+
+    function validateGlobal() {
+        let hits = 0;
+        for(let id in allAns) {
+            const input = document.getElementById(id);
+            if(!input) continue;
+            const val = input.value.trim().toLowerCase();
+            if(allAns[id].includes(val)) {
+                input.style.borderColor = "var(--success)";
+                hits++;
+            } else {
+                input.style.borderColor = "var(--primary)";
+            }
+        }
+        document.querySelectorAll('.hits-display').forEach(display => { display.innerText = hits; });
+        return hits;
+    }
+
+    function nextBlock(n) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('block'+n+'-screen').classList.add('active');
+        window.scrollTo(0,0);
+        validateGlobal();
+    }
+
+    function finishAll() {
+        let total = validateGlobal();
+        let grade = Math.round((total / 12) * 100);
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('final-screen').classList.add('active');
+        document.getElementById('final-grade').innerText = grade + "%";
+        document.getElementById('stats-text').innerText = `Aciertos: ${total} de 12.`;
+        const msg = `Hola Rafael, soy ${document.getElementById('userName').value}. Mi puntaje en Unit 1 (Part B) es: ${grade}%`;
+        document.getElementById('wa-link').href = `https://wa.me/51990171277?text=${encodeURIComponent(msg)}`;
+    }
+</script>
+</body>
+</html>
