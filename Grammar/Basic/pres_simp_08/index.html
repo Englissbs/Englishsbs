@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Step by Step - Wh- Questions</title>
+    <style>
+        :root { --primary: #002d72; --secondary: #c8102e; --success: #28a745; --danger: #dc3545; --bg: #f4f4f9; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; max-width: 850px; width: 100%; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; position: relative; }
+        .welcome-container { max-width: 65%; margin: 0 auto; }
+        .logo { width: 300px; margin-bottom: 20px; }
+        .screen { display: none; }
+        .active { display: block; }
+        .btn { background: var(--primary); color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; width: 90%; margin-top: 10px; transition: 0.3s; text-decoration: none; display: inline-block; }
+        .btn:hover { background: var(--secondary); }
+        .live-counter { position: sticky; top: 0; background: var(--primary); color: white; padding: 10px 20px; border-radius: 0 0 10px 10px; font-weight: bold; font-size: 0.9em; margin-bottom: 20px; z-index: 100; display: inline-block; }
+        .exercise-box { text-align: left; background: #f0f4f8; padding: 25px; border-radius: 10px; border-left: 5px solid var(--primary); margin-bottom: 20px; line-height: 2.5; }
+        .full-input { border: 2px solid var(--primary); padding: 8px; width: 88%; border-radius: 4px; font-weight: bold; margin-bottom: 10px; }
+        .q-mark { font-size: 1.2em; font-weight: bold; color: var(--primary); margin-left: 5px; }
+        .grade-box { background: #f8f9fa; padding: 20px; border-radius: 10px; border: 1px solid #ddd; margin: 20px 0; }
+        .grade-num { font-size: 3.5em; color: var(--primary); font-weight: bold; }
+        .text-input-welcome { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 5px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo-container"><img src="assets/logo.jpg" alt="English Step by Step" class="logo"></div>
+    
+    <div id="welcome-screen" class="screen active">
+        <div class="welcome-container">
+            <h2>BIENVENIDO</h2>
+            <p>Aprende Inglés paso a paso con <strong>Rafael</strong>.</p>
+            <input type="text" id="userName" placeholder="Nombre completo" class="text-input-welcome">
+            <input type="email" id="userEmail" placeholder="Tu correo electrónico" class="text-input-welcome">
+            <div style="font-size: 0.85em; text-align: center; margin: 20px 0; color: #555;">
+                <input type="checkbox" id="legalConsent"> 
+                <label for="legalConsent">Acepto el tratamiento de datos y autorizo información sobre Lives en TikTok y YouTube.</label>
+            </div>
+            <button class="btn" onclick="startApp()">EMPEZAR PRÁCTICA</button>
+        </div>
+    </div>
+
+    <div id="block1-screen" class="screen">
+        <div class="live-counter">Aciertos Totales: <span class="hits-display">0</span> / 20</div>
+        <h3 style="color: var(--primary); text-align: left;">Part 1: Information Questions (What, Where, When)</h3>
+        <p style="text-align: left; font-size: 0.9em; color: #666;">Write the question based on the answer provided.</p>
+        <div class="exercise-box">
+            1. I live in Arequipa.<br><input type="text" id="p1_1" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span><br>
+            2. I play soccer on Saturdays.<br><input type="text" id="p1_2" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span><br>
+            3. My sister works in a bank.<br><input type="text" id="p1_3" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span><br>
+            4. I want a cup of coffee.<br><input type="text" id="p1_4" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span><br>
+            5. The class starts at 8:00 AM.<br><input type="text" id="p1_5" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span><br>
+            6. We study English at home.<br><input type="text" id="p1_6" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span><br>
+            7. My parents visit me every Sunday.<br><input type="text" id="p1_7" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span><br>
+            8. He listens to rock music.<br><input type="text" id="p1_8" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span><br>
+            9. I go to the gym in the morning.<br><input type="text" id="p1_9" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span><br>
+            10. They buy bread at the bakery.<br><input type="text" id="p1_10" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span>
+        </div>
+        <button class="btn" onclick="nextBlock(2)">SIGUIENTE BLOQUE</button>
+    </div>
+
+    <div id="block2-screen" class="screen">
+        <div class="live-counter">Aciertos Totales: <span class="hits-display">0</span> / 20</div>
+        <h3 style="color: var(--primary); text-align: left;">Part 2: Personal Questions (Who, Why, How, How old)</h3>
+        <div class="exercise-box">
+            1. I study English because I want a better job.<br><input type="text" id="p2_1" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span><br>
+            2. My best friend is Carlos.<br><input type="text" id="p2_2" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span><br>
+            3. I am 30 years old.<br><input type="text" id="p2_3" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span><br>
+            4. I go to work by bus.<br><input type="text" id="p2_4" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span><br>
+            5. She is sad because she is tired.<br><input type="text" id="p2_5" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span><br>
+            6. My teacher is Mr. Pimentel.<br><input type="text" id="p2_6" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span><br>
+            7. I am fine, thank you.<br><input type="text" id="p2_7" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span><br>
+            8. My brother is 15 years old.<br><input type="text" id="p2_8" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span><br>
+            9. They are here because they have a meeting.<br><input type="text" id="p2_9" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span><br>
+            10. We get to the airport by taxi.<br><input type="text" id="p2_10" class="full-input" oninput="validateGlobal()"><span class="q-mark">?</span>
+        </div>
+        <button class="btn" onclick="finishAll()">FINALIZAR Y ENVIAR</button>
+    </div>
+
+    <div id="final-screen" class="screen">
+        <h2>¡Excelente trabajo, <span id="display-name"></span>!</h2>
+        <div class="grade-box">
+            <div id="final-grade" class="grade-num"></div>
+            <p id="stats-text"></p>
+        </div>
+        <a id="wa-link" href="#" class="btn" style="background:#25d366;" target="_blank">Enviar resultados a Rafael</a>
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
+            <a href="https://www.tiktok.com/@englishsbs.peru" target="_blank" class="btn" style="background:#000; width: 45%;">TikTok</a>
+            <a href="https://www.youtube.com/@Englishsbs_peru" target="_blank" class="btn" style="background:#FF0000; width: 45%;">YouTube</a>
+        </div>
+        <button class="btn" style="background: #666;" onclick="location.reload()">Reintentar</button>
+    </div>
+</div>
+
+<script>
+    const allAnswers = {
+        // Block 1
+        p1_1: ["where do you live"], p1_2: ["when do you play soccer", "what do you do on saturdays"], p1_3: ["where does your sister work"], p1_4: ["what do you want"], p1_5: ["what time does the class start", "when does the class start"], p1_6: ["where do you study english"], p1_7: ["when do your parents visit you"], p1_8: ["what music does he listen to", "what does he listen to"], p1_9: ["when do you go to the gym", "where do you go in the morning"], p1_10: ["where do they buy bread"],
+        // Block 2
+        p2_1: ["why do you study english"], p2_2: ["who is your best friend"], p2_3: ["how old are you"], p2_4: ["how do you go to work"], p2_5: ["why is she sad"], p2_6: ["who is your teacher"], p2_7: ["how are you"], p2_8: ["how old is your brother"], p2_9: ["why are they here"], p2_10: ["how do you get to the airport"]
+    };
+
+    function startApp() {
+        const u = document.getElementById('userName').value;
+        if(!u || !document.getElementById('legalConsent').checked) return alert("Por favor, completa tus datos.");
+        document.getElementById('display-name').innerText = u;
+        document.getElementById('welcome-screen').classList.remove('active');
+        document.getElementById('block1-screen').classList.add('active');
+    }
+
+    function validateGlobal() {
+        let totalHits = 0;
+        for(let id in allAnswers) {
+            const input = document.getElementById(id);
+            if(!input) continue;
+            const val = input.value.trim().toLowerCase().replace(/[?.]/g, "");
+            if(allAnswers[id].includes(val)) {
+                input.style.borderColor = "var(--success)";
+                totalHits++;
+            } else {
+                input.style.borderColor = "var(--primary)";
+            }
+        }
+        document.querySelectorAll('.hits-display').forEach(display => {
+            display.innerText = totalHits;
+        });
+        return totalHits;
+    }
+
+    function nextBlock(n) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('block'+n+'-screen').classList.add('active');
+        validateGlobal();
+    }
+
+    function finishAll() {
+        let total = validateGlobal();
+        let grade = Math.round((total / 20) * 100);
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('final-screen').classList.add('active');
+        document.getElementById('final-grade').innerText = grade + "%";
+        document.getElementById('stats-text').innerText = `Lograste ${total} de 20 aciertos.`;
+        const msg = `Hola Rafael, soy ${document.getElementById('userName').value}. Mi nota en Wh- Questions es: ${grade}%`;
+        document.getElementById('wa-link').href = `https://wa.me/51990171277?text=${encodeURIComponent(msg)}`;
+    }
+</script>
+</body>
+</html>
