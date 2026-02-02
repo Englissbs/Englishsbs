@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index.html</title>
+    <style>
+        :root { --primary: #002d72; --secondary: #c8102e; --success: #28a745; --danger: #dc3545; --bg: #f4f4f9; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; max-width: 30%; width: 100%; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; position: relative; }
+        @media (max-width: 768px) { .container { max-width: 95%; } }
+        .logo { width: 180px; margin-bottom: 20px; }
+        .screen { display: none; }
+        .active { display: block; }
+        /* BOTONES UNIFICADOS AL 85% */
+        .btn { background: var(--primary); color: white; padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; width: 85%; margin: 10px auto; transition: 0.3s; text-decoration: none; display: block; border-bottom: 4px solid rgba(0,0,0,0.2); font-size: 0.9em; box-sizing: border-box; }
+        .btn:hover { background: var(--secondary); transform: translateY(-2px); }
+        .live-counter { position: sticky; top: 0; background: var(--primary); color: white; padding: 8px 15px; border-radius: 0 0 10px 10px; font-weight: bold; font-size: 0.8em; margin-bottom: 20px; z-index: 100; display: inline-block; }
+        .exercise-box { text-align: left; background: #f0f4f8; padding: 20px; border-radius: 10px; border-left: 5px solid var(--primary); margin-bottom: 20px; line-height: 2.2; font-size: 0.9em; }
+        .inline-input { border: 2px solid var(--primary); padding: 4px; width: 130px; border-radius: 4px; font-weight: bold; font-family: inherit; text-align: center; }
+        .grade-box { background: #f8f9fa; padding: 20px; border-radius: 10px; border: 1px solid #ddd; margin: 15px 0; }
+        .grade-num { font-size: 3em; color: var(--primary); font-weight: bold; }
+        .feedback-text { font-weight: bold; color: var(--secondary); margin-top: 10px; font-size: 1.1em; }
+        .text-input-welcome { width: 85%; padding: 10px; margin: 8px 0; border: 2px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        .social-container { display: flex; justify-content: center; width: 85%; margin: 0 auto; gap: 10px; }
+        .social-btn { flex: 1; padding: 10px; border-radius: 5px; color: white; text-decoration: none; font-weight: bold; font-size: 0.75em; display: inline-block; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo-container"><img src="assets/logo.jpg" alt="English Step by Step" class="logo"></div>
+    
+    <div id="welcome-screen" class="screen active">
+        <div class="welcome-container">
+            <h2>WELCOME!</h2>
+            <p style="font-size: 0.9em;"><strong>Countries & Nationalities</strong></p>
+            <input type="text" id="userName" placeholder="Nombre completo" class="text-input-welcome">
+            <input type="email" id="userEmail" placeholder="Tu correo electrónico" class="text-input-welcome">
+            <div style="font-size: 0.8em; text-align: center; margin: 15px 0; color: #555;">
+                <input type="checkbox" id="legalConsent"> 
+                <label for="legalConsent">Acepto el envío de información sobre <strong>Lives en TikTok y YouTube</strong>.</label>
+            </div>
+            <button class="btn" onclick="startApp()">START PRACTICE</button>
+        </div>
+    </div>
+
+    <div id="block1-screen" class="screen">
+        <div class="live-counter">Aciertos: <span class="hits-display">0</span> / 16</div>
+        <h4 style="color: var(--primary); text-align: left;">1. Write Country or Nationality</h4>
+        <div class="exercise-box">
+            1. Peru - <input type="text" id="p1_1" class="inline-input" oninput="validateGlobal()"><br>
+            <br>
+            2. <input type="text" id="p1_2" class="inline-input" oninput="validateGlobal()"> - American<br>
+            <br>
+            3. Japan - <input type="text" id="p1_3" class="inline-input" oninput="validateGlobal()"><br>
+            <br>
+            4. <input type="text" id="p1_4" class="inline-input" oninput="validateGlobal()"> - Brazilian<br>
+            <br>
+            5. Mexico - <input type="text" id="p1_5" class="inline-input" oninput="validateGlobal()"><br>
+            <br>
+            6. <input type="text" id="p1_6" class="inline-input" oninput="validateGlobal()"> - French<br>
+            <br>
+            7. Italy - <input type="text" id="p1_7" class="inline-input" oninput="validateGlobal()"><br>
+            <br>
+            8. <input type="text" id="p1_8" class="inline-input" oninput="validateGlobal()"> - British
+        </div>
+        <button class="btn" onclick="nextBlock(2)">NEXT PART</button>
+    </div>
+
+    <div id="block2-screen" class="screen">
+        <div class="live-counter">Aciertos: <span class="hits-display">0</span> / 16</div>
+        <h4 style="color: var(--primary); text-align: left;">2. Numbers in Letters</h4>
+        <div class="exercise-box">
+            11: <input type="text" id="p2_1" class="inline-input" oninput="validateGlobal()"><br>
+            <br>
+            15: <input type="text" id="p2_2" class="inline-input" oninput="validateGlobal()"><br>
+            <br>
+            22: <input type="text" id="p2_3" class="inline-input" oninput="validateGlobal()"><br>
+            <br>
+            40: <input type="text" id="p2_4" class="inline-input" oninput="validateGlobal()"><br>
+            <br>
+            58: <input type="text" id="p2_5" class="inline-input" oninput="validateGlobal()"><br>
+            <br>
+            73: <input type="text" id="p2_6" class="inline-input" oninput="validateGlobal()"><br>
+            <br>
+            99: <input type="text" id="p2_7" class="inline-input" oninput="validateGlobal()"><br>
+            <br>
+            37: <input type="text" id="p2_8" class="inline-input" oninput="validateGlobal()">
+        </div>
+        <button class="btn" onclick="finishAll()">FINISH</button>
+    </div>
+
+    <div id="final-screen" class="screen">
+        <h2>Hey, <span id="display-name-final"></span>!</h2>
+        <div class="grade-box">
+            <div id="final-grade" class="grade-num"></div>
+            <div id="feedback-msg" class="feedback-text"></div>
+            <p id="stats-text" style="font-size: 0.9em; margin-top: 10px;"></p>
+        </div>
+        <a id="wa-link" href="#" class="btn" style="background:#25d366; border-bottom: 4px solid #128C7E;" target="_blank">Enviar resultados a Rafael</a>
+        <div class="social-container">
+            <a href="https://www.tiktok.com/@englishsbs.peru" target="_blank" class="social-btn" style="background:#000;">Síguenos en TikTok</a>
+            <a href="https://www.youtube.com/@Englishsbs_peru" target="_blank" class="social-btn" style="background:#FF0000;">Síguenos en YouTube</a>
+        </div>
+        <button class="btn" style="background: #555;" onclick="location.reload()">Rehacer la práctica</button>
+        <a href="https://englissbs.github.io/Englishsbs/" class="btn" style="background: #444;">Regresar al Inicio</a>
+    </div>
+</div>
+<script>
+    const allAns = {
+        p1_1: ["peruvian"], p1_2: ["usa", "the united states", "united states"], p1_3: ["japanese"], p1_4: ["brazil"], p1_5: ["mexican"], p1_6: ["france"], p1_7: ["italian"], p1_8: ["uk", "united kingdom", "the united kingdom"],
+        p2_1: ["eleven"], p2_2: ["fifteen"], p2_3: ["twenty-two", "twenty two"], p2_4: ["forty"], p2_5: ["fifty-eight", "fifty eight"], p2_6: ["seventy-three", "seventy three"], p2_7: ["ninety-nine", "ninety nine"], p2_8: ["thirty-seven", "thirty seven"]
+    };
+    function startApp() {
+        const u = document.getElementById('userName').value;
+        if(!u || !document.getElementById('legalConsent').checked) return alert("Por favor, completa tus datos.");
+        document.getElementById('display-name-final').innerText = u;
+        document.getElementById('welcome-screen').classList.remove('active');
+        document.getElementById('block1-screen').classList.add('active');
+    }
+    function validateGlobal() {
+        let hits = 0;
+        for(let id in allAns) {
+            const input = document.getElementById(id);
+            if(!input) continue;
+            const val = input.value.trim().toLowerCase();
+            if(allAns[id].includes(val)) { input.style.borderColor = "var(--success)"; hits++; }
+            else { input.style.borderColor = "var(--primary)"; }
+        }
+        document.querySelectorAll('.hits-display').forEach(d => d.innerText = hits);
+        return hits;
+    }
+    function nextBlock(n) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('block'+n+'-screen').classList.add('active');
+        window.scrollTo(0,0);
+    }
+    function finishAll() {
+        let total = validateGlobal();
+        let grade = Math.round((total / 16) * 100);
+        let msg = "";
+        if(grade >= 99) msg = "Great job, keep like this.";
+        else if(grade >= 91) msg = "You are mastering, continue growing up.";
+        else if(grade >= 76) msg = "You are doing well but you can do better.";
+        else if(grade >= 51) msg = "It's Ok but you still need to improve.";
+        else msg = "I advise you to go check this topic again.";
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('final-screen').classList.add('active');
+        document.getElementById('final-grade').innerText = grade + "%";
+        document.getElementById('feedback-msg').innerText = msg;
+        document.getElementById('stats-text').innerText = `Aciertos: ${total} de 16.`;
+        document.getElementById('wa-link').href = `https://wa.me/51990171277?text=${encodeURIComponent("Hola Rafael, soy " + document.getElementById('userName').value + ". Mi puntaje en Countries es: " + grade + "%")}`;
+    }
+</script>
+</body>
+</html>
