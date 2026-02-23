@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="logoenglishsbs.jpg" alt="Logotipo de Englishsbs" width="400">
+<img src="assets/logo.jpg" alt="Logotipo de Englishsbs" width="480">
 
 <h1>ENGLISH ONLINE LEARNING</h1>
 
@@ -9,6 +9,7 @@
 ---
 
 ## 📚 Resources by Level
+
 ### 🧒 Young Learners (Prepare!)
 * [Prepare 1](https://englissbs.github.io/Englishsbs/Young-Learners/Prepare-1/)
 * [Prepare 2](https://englissbs.github.io/Englishsbs/Young-Learners/Prepare-2/)
@@ -16,6 +17,14 @@
 * [Prepare 4](https://englissbs.github.io/Englishsbs/Young-Learners/Prepare-4/)
 * [Prepare 5](https://englissbs.github.io/Englishsbs/Young-Learners/Prepare-5/)
 * [Prepare 6](https://englissbs.github.io/Englishsbs/Young-Learners/Prepare-6/)
+
+### 🎒 Primary (Fun Skills)
+* [Fun Skills 1](https://englissbs.github.io/Englishsbs/Primary/Fun-Skills-1/)
+* [Fun Skills 2](https://englissbs.github.io/Englishsbs/Primary/Fun-Skills-2/)
+* [Fun Skills 3](https://englissbs.github.io/Englishsbs/Primary/Fun-Skills-3/)
+* [Fun Skills 4](https://englissbs.github.io/Englishsbs/Primary/Fun-Skills-4/)
+* [Fun Skills 5](https://englissbs.github.io/Englishsbs/Primary/Fun-Skills-5/)
+* [Fun Skills 6](https://englissbs.github.io/Englishsbs/Primary/Fun-Skills-6/)
   
 ### 🎓 Adults (Interchange)
 * [Interchange Intro](https://englissbs.github.io/Englishsbs/Adults/Interchange-Intro/)
@@ -67,16 +76,24 @@
 ---
 
 ## 📩 Contact & Support
-¿Tienes alguna duda sobre los ejercicios? 
-¿Necesitas aprender Inglés?
-Escríbeme directamente!
+¿Tienes alguna duda sobre los ejercicios?  
+¿Necesitas aprender Inglés?  
+¡Escríbeme directamente!
 
+<div align="center">
 <a href="https://wa.me/51990171277?text=Hola%20Profesor%20Rafael,%20tengo%20una%20consulta" target="_blank">
-  <img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/whatsapp.svg" alt="WhatsApp" width="40" height="40" /> 
-  <strong>Escríbeme por WhatsApp aquí</strong>
+  <img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/whatsapp.svg" alt="WhatsApp" width="40" height="40" /> 
+  <br>
+  <strong>Escríbeme por WhatsApp aquí</strong>
 </a>
+</div>
 
 ---
+
 <div align="center">
-  <p><strong>A nuestros estudiantes:</strong> Los quizzes, exámenes de medio ciclo y final de ciclo son administrados únicamente a través de nuestra plataforma interna.</p>
+  <a href="https://englissbs.github.io/Englishsbs/">Regresar al inicio</a> | 
+  <a href="https://www.tiktok.com/@englishsbs.peru">Síguenos en TikTok</a> | 
+  <a href="https://www.youtube.com/@Englishsbs_peru">Síguenos en YouTube</a>
+  <br><br>
+  <p><strong>A nuestros estudiantes:</strong> Los quizzes, exámenes de medio ciclo y final de ciclo son administrados únicamente a través de nuestra plataforma interna.</p>
 </div>
