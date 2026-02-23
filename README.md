@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/logoenglishsbs.jpg" alt="Logotipo de Englishsbs" width="480">
+<img src="logoenglishsbs.jpg" alt="Logotipo de Englishsbs" width="480">
 
 <h1>ENGLISH ONLINE LEARNING</h1>
 
