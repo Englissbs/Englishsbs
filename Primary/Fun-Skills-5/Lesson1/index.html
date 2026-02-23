@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Step by Step - Rhyming Challenge</title>
+    <style>
+        :root {
+            --primary-blue: #00337C;
+            --success-green: #25D366;
+            --danger-red: #FF0000;
+            --yt-red: #FF0000;
+            --tk-black: #010101;
+            --gray-btn: #707070;
+            --bg-light: #F8F9FA;
+            --base-font: 16px;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background: var(--bg-light); 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            font-size: var(--base-font);
+        }
+
+        .container {
+            width: 95%;
+            max-width: 50%;
+            background: white;
+            padding: 35px;
+            margin: 20px 0;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .logo { width: 300px; margin-bottom: 25px; }
+        .screen { display: none; animation: fadeIn 0.4s; }
+        .active { display: block; }
+
+        h2 { font-size: 1.8rem; color: var(--primary-blue); }
+        p { font-size: 1.1rem; line-height: 1.5; }
+
+        input[type="text"], input[type="email"] {
+            width: 85%; padding: 14px; margin: 12px 0; border: 1px solid #ddd; border-radius: 8px; font-size: 1.1rem;
+        }
+        .privacy { font-size: 1rem; width: 85%; margin: 15px auto; display: flex; gap: 12px; text-align: left; }
+
+        .timer-display { font-size: 2.5rem; color: var(--primary-blue); font-weight: bold; margin: 20px 0; }
+        .word-bank {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+            background: #f1f3f5; padding: 25px; border-radius: 12px; margin-bottom: 30px;
+        }
+        .word-item { 
+            background: white; padding: 10px 18px; border-radius: 6px; font-weight: bold;
+            border: 1px solid #ccc; font-size: 1.1rem;
+        }
+        .word-used { background: #ffcccc !important; color: var(--danger-red) !important; text-decoration: line-through; border-color: var(--danger-red); opacity: 0.6; }
+
+        .exercise-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: left; }
+        .pair-box { 
+            background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 10px; 
+            display: flex; align-items: center; justify-content: space-between; 
+            border-left: 6px solid var(--primary-blue); font-size: 1.2rem;
+        }
+        .answer-input { border: 2px solid #bdc3c7; padding: 10px; border-radius: 6px; width: 55%; font-size: 1.1rem; font-weight: bold; outline: none; }
+        .answer-input.valid { border-color: var(--success-green); background: #e8f5e9; color: var(--success-green); }
+
+        /* Botones */
+        .btn-main { background: var(--primary-blue); color: white; border: none; padding: 18px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 85%; text-transform: uppercase; font-size: 1.1rem; }
+        .btn-ws { background: var(--success-green); color: white; border: none; padding: 16px; border-radius: 10px; width: 100%; margin: 8px 0; font-weight: bold; cursor: pointer; text-decoration: none; display: block; font-size: 1.1rem; }
+        .social-row { display: flex; justify-content: space-between; margin-bottom: 12px; }
+        .btn-tk { background: var(--tk-black); color: white; border: none; padding: 14px; border-radius: 10px; width: 48%; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; }
+        .btn-yt { background: var(--yt-red); color: white; border: none; padding: 14px; border-radius: 10px; width: 48%; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; }
+        .btn-gray { background: var(--gray-btn); color: white; border: none; padding: 14px; border-radius: 10px; width: 100%; margin: 6px 0; cursor: pointer; font-size: 1rem; text-decoration: none; display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @media (max-width: 768px) { .container { max-width: 95%; } .exercise-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="assets/logo.jpg" alt="English Step by Step" class="logo">
+
+    <div id="screen1" class="screen active">
+        <h2>Bienvenido</h2>
+        <p>Aprende Inglés paso a paso con <strong>Rafael</strong>.</p>
+        <input type="text" id="userName" placeholder="Nombre completo">
+        <input type="email" id="userEmail" placeholder="Tu correo electrónico">
+        <div class="privacy">
+            <input type="checkbox" id="privacyCheck">
+            <span>Acepto el tratamiento de mis datos para recibir feedback y autorizo el envío de información sobre clases en vivo en TikTok y YouTube.</span>
+        </div>
+        <button class="btn-main" onclick="goToRead()">Empezar Práctica</button>
+    </div>
+
+    <div id="screen2" class="screen">
+        <h3>Fase 1: Pronunciación</h3>
+        <p>Lee en voz alta todas las palabras (90 segundos).</p>
+        <div class="timer-display" id="readTimer">90s</div>
+        <div class="word-bank" id="fullBank"></div>
+        <button class="btn-main" onclick="startExercise()">¡Estoy listo!</button>
+    </div>
+
+    <div id="screen3" class="screen">
+        <div class="timer-display" id="gameTimer">02:00</div>
+        <div class="word-bank" id="gameBank"></div>
+        <div class="exercise-grid" id="grid"></div>
+    </div>
+
+    <div id="screen4" class="screen">
+        <h2 id="final-title"></h2>
+        <div style="background: #f8f9fa; padding: 30px; border-radius: 20px; margin: 20px 0; border: 1px solid #eee;">
+            <p>Tu calificación final:</p>
+            <h1 id="score-pct" style="font-size: 5rem; color: var(--primary-blue); margin: 15px 0;">0%</h1>
+            <p id="aciertos-errores" style="font-size: 1.2rem; font-weight: bold;"></p>
+        </div>
+        <p id="feedback-txt" style="font-size: 1.25rem; margin-bottom: 30px;"></p>
+        
+        <a href="https://wa.me/TUNUMEROAQUI" target="_blank" class="btn-ws">Contactar por WhatsApp con Rafael</a>
+        <div class="social-row">
+            <a href="https://www.tiktok.com/@englishsbs.peru" target="_blank" class="btn-tk">TikTok</a>
+            <a href="https://www.youtube.com/@Englishsbs_peru" target="_blank" class="btn-yt">YouTube</a>
+        </div>
+        <button class="btn-gray" onclick="location.reload()">Volver a realizar la práctica</button>
+        <a href="https://englissbs.github.io/Englishsbs/" class="btn-gray">Regresar al inicio</a>
+    </div>
+</div>
+
+<script>
+    // Lógica idéntica a la anterior con vinculación de enlaces aplicada.
+    const pairs = [{q:"Cat",a:"hat"},{q:"Day",a:"say"},{q:"Boy",a:"toy"},{q:"Cheese",a:"trees"},{q:"Park",a:"shark"},{q:"Bread",a:"red"},{q:"Pear",a:"chair"},{q:"Peach",a:"beach"},{q:"Cow",a:"now"},{q:"Street",a:"meat"}];
+    const allWords = ["cat","hat","day","say","boy","toy","cheese","trees","park","shark","bread","red","pear","chair","peach","beach","cow","now","street","meat"];
+    const answersOnly = ["hat","say","toy","trees","shark","red","chair","beach","now","meat"];
+    let timer, studentName = "";
+
+    function goToRead() {
+        studentName = document.getElementById('userName').value.trim();
+        if(!studentName || !document.getElementById('privacyCheck').checked) { alert("Completa tus datos."); return; }
+        document.getElementById('screen1').classList.remove('active');
+        document.getElementById('screen2').classList.add('active');
+        const fullBank = document.getElementById('fullBank');
+        [...allWords].sort(()=>Math.random()-0.5).forEach(w => fullBank.innerHTML += `<span class="word-item">${w}</span>`);
+        let timeLeft = 90;
+        timer = setInterval(() => { timeLeft--; document.getElementById('readTimer').innerText = timeLeft+"s"; if(timeLeft<=0) startExercise(); }, 1000);
+    }
+
+    function startExercise() {
+        clearInterval(timer);
+        document.getElementById('screen2').classList.remove('active');
+        document.getElementById('screen3').classList.add('active');
+        const gameBank = document.getElementById('gameBank');
+        [...answersOnly].sort(()=>Math.random()-0.5).forEach(w => gameBank.innerHTML += `<span class="word-item" id="bank-${w}">${w}</span>`);
+        const grid = document.getElementById('grid');
+        [...pairs].sort(()=>Math.random()-0.5).forEach(p => { grid.innerHTML += `<div class="pair-box"><span>${p.q} & </span><input type="text" class="answer-input" data-ans="${p.a}" oninput="validate(this)"></div>`; });
+        let timeLeft = 120;
+        timer = setInterval(() => { timeLeft--; let m=Math.floor(timeLeft/60), s=timeLeft%60; document.getElementById('gameTimer').innerText = `${m}:${s<10?'0':''}${s}`; if(timeLeft<=0) finish(); }, 1000);
+    }
+
+    function validate(input) {
+        if(input.value.trim().toLowerCase() === input.dataset.ans) {
+            input.classList.add('valid'); input.readOnly = true;
+            document.getElementById(`bank-${input.dataset.ans}`).classList.add('word-used');
+            if(document.querySelectorAll('.valid').length === pairs.length) finish();
+        }
+    }
+
+    function finish() {
+        clearInterval(timer);
+        const correct = document.querySelectorAll('.valid').length;
+        const score = Math.round((correct/pairs.length)*100);
+        document.getElementById('screen3').classList.remove('active');
+        document.getElementById('screen4').classList.add('active');
+        document.getElementById('final-title').innerText = `¡Práctica Terminada, ${studentName}!`;
+        document.getElementById('score-pct').innerText = score+"%";
+        document.getElementById('aciertos-errores').innerText = `Aciertos: ${correct} | Errores: ${pairs.length-correct}`;
+        const txt = document.getElementById('feedback-txt');
+        if(score <= 50) txt.innerText = "I advise you to go check this topic again. Keep practicing!";
+        else if(score <= 75) txt.innerText = "It's Ok but you still need to improve. Nice try!";
+        else if(score <= 90) txt.innerText = "You are doing well but you can do better. Good job!";
+        else if(score <= 98) txt.innerText = "You are mastering, continue growing up. Well done!";
+        else txt.innerText = "Great job, keep like this. Excellent!";
+    }
+</script>
+</body>
+</html>
