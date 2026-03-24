@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Englishsbs - Placement Test v3.7</title>
+    <style>
+        :root { --primary: #007bff; --success: #25D366; --bg: #f4f7f6; --text: #333; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--text); display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .container { width: 95%; max-width: 30%; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        @media (max-width: 768px) { .container { max-width: 95%; } }
+        .logo { display: block; margin: 0 auto 20px; width: 120%; max-width: 280px; }
+        .step { display: none; }
+        .step.active { display: block !important; animation: fadeIn 0.4s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .section-header { background: #e9ecef; padding: 12px; border-radius: 5px; margin: 20px 0; font-weight: bold; color: var(--primary); border-left: 5px solid var(--primary); text-transform: uppercase; font-size: 0.85rem; }
+        .passage { font-style: italic; background: #fdfdfd; padding: 18px; border: 1px solid #ddd; border-radius: 8px; margin: 15px 0; font-size: 0.95rem; line-height: 1.6; text-align: justify; }
+        .question-block { margin-bottom: 25px; padding: 15px; border-bottom: 1px solid #eee; }
+        label { display: block; margin-bottom: 10px; font-weight: 500; font-size: 1.05rem; line-height: 1.5; }
+        select, input { width: 100%; padding: 12px; border: 2px solid var(--primary); border-radius: 8px; font-size: 1.1rem; box-sizing: border-box; outline: none; margin-bottom: 15px; }
+        .btn { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.2rem; cursor: pointer; font-weight: bold; margin-top: 15px; text-align: center; }
+        .results-box { text-align: center; padding: 20px; border: 2px solid var(--primary); border-radius: 10px; margin-top: 20px; background: #f0f7ff; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="../logoenglishsbs.jpg" alt="Englishsbs Logo" class="logo">
+
+    <div id="step-0" class="step active">
+        <h3 style="text-align:center; color:var(--primary);">TOEFL Placement Registration</h3>
+        <p style="text-align:center; font-size:0.9rem; color:#666;">Bienvenida. Ingresa tus datos para habilitar el examen.</p>
+        <input type="text" id="reg-name" placeholder="Full Name" required>
+        <input type="email" id="reg-email" placeholder="Email Address" required>
+        <button type="button" class="btn" onclick="startExam()">Comenzar Examen</button>
+    </div>
+
+    <form id="placementForm" action="https://formspree.io/f/xaqproea" method="POST">
+        <input type="hidden" name="Student_Name" id="hidden-name">
+        <input type="hidden" name="Student_Email" id="hidden-email">
+        <input type="hidden" name="Reading_Score" id="res-r">
+        <input type="hidden" name="Structure_Score" id="res-s">
+        <input type="hidden" name="Vocabulary_Score" id="res-v">
+        <input type="hidden" name="Writing_Score" id="res-w">
+        <input type="hidden" name="Total_80" id="res-total">
+        <input type="hidden" name="Escala_Rafael" id="hiddenFeedback">
+        <input type="hidden" name="Analisis_Pregunta_por_Pregunta" id="detailed-analysis">
+
+        <div id="step-1" class="step">
+            <div class="section-header">Section 1: Reading (Passage 1/4)</div>
+            <div class="passage"><b>Traveling in the Digital Age:</b> The way people plan their vacations has changed significantly over the last decade. Previously, travelers relied heavily on travel agencies to book flights and hotels. Today, however, the internet allows individuals to compare prices and read reviews from other travelers in seconds. This accessibility has made travel more affordable for a wider range of people. Nevertheless, the abundance of information online can sometimes be overwhelming for those who prefer a more organized experience.</div>
+            <div id="r-cont-1"></div>
+            <button type="button" class="btn" onclick="navTo(2)">Siguiente Lectura</button>
+        </div>
+
+        <div id="step-2" class="step">
+            <div class="section-header">Section 1: Reading (Passage 2/4)</div>
+            <div class="passage"><b>Environment and Daily Habits:</b> Small changes in our daily routines can have a huge impact on the planet's health. For instance, reducing the use of single-use plastics can prevent tons of waste from entering our oceans. Many cities are now encouraging citizens to use public transportation or bicycles to reduce carbon emissions. While these changes might seem minor, when practiced by millions of people, they contribute to a sustainable future. Education is key to helping people understand that their individual choices really do matter in the long run.</div>
+            <div id="r-cont-2"></div>
+            <button type="button" class="btn" onclick="navTo(3)">Siguiente Lectura</button>
+        </div>
+
+        <div id="step-3" class="step">
+            <div class="section-header">Section 1: Reading (Passage 3/4)</div>
+            <div class="passage"><b>Social Media and Communication:</b> The rise of social media platforms has redefined how we maintain our relationships. We can now stay connected with friends and family across the globe in real-time. This has made the world feel like a much smaller place. On the other hand, some experts worry that digital communication is replacing deep, face-to-face interactions. It is common to see groups of people in restaurants looking at their phones instead of talking to each other. Finding a balance between the digital and physical worlds is essential.</div>
+            <div id="r-cont-3"></div>
+            <button type="button" class="btn" onclick="navTo(4)">Siguiente Lectura</button>
+        </div>
+
+        <div id="step-4" class="step">
+            <div class="section-header">Section 1: Reading (Passage 4/4)</div>
+            <div class="passage"><b>Remote Work Challenges:</b> Working from home became a necessity for many during the recent global health crisis. While many employees enjoy the flexibility and the lack of a commute, others struggle with feelings of isolation. Without the structure of a traditional office, it can be difficult to separate work life from personal time. Some people find themselves working longer hours than they did in the office. To be successful, remote workers need to establish a clear schedule and a dedicated workspace to maintain their productivity and mental health.</div>
+            <div id="r-cont-4"></div>
+            <button type="button" class="btn" onclick="navTo(5)">Siguiente Sección: Structure</button>
+        </div>
+
+        <div id="step-5" class="step"><div class="section-header">Section 2: Sentence Structure</div><div id="s-content"></div><button type="button" class="btn" onclick="navTo(6)">Siguiente: Vocabulary</button></div>
+        <div id="step-6" class="step"><div class="section-header">Section 3: Academic Vocabulary</div><div id="v-content"></div><button type="button" class="btn" onclick="navTo(7)">Siguiente: Writing Foundations</button></div>
+        <div id="step-7" class="step"><div class="section-header">Section 4: Writing Foundations</div><div id="w-content"></div><button type="button" class="btn" onclick="finalize()" style="background:var(--success);">Finalizar el examen</button></div>
+    </form>
+
+    <div id="step-8" class="step">
+        <h3 style="text-align:center;">Test Completed!</h3>
+        <div class="results-box" id="resDisplay"></div>
+        <a href="https://englissbs.github.io/Englishsbs/" class="btn" style="background:#666; text-decoration:none;">Regresar al inicio</a>
+    </div>
+</div>
+
+<script>
+// LAS 80 PREGUNTAS CON CONTEXTO NATURAL
+const quizData = {
+    r1: [
+        {q: "How has vacation planning evolved in the last decade according to the passage?", o: ["It has changed significantly due to internet tools", "It has stayed the same thanks to travel agencies", "It has become more difficult for young people", "It has become exclusively for rich individuals"]},
+        {q: "What is mentioned as a specific internet benefit for travelers?", o: ["Comparing prices and reading reviews quickly", "Getting free flights through social media", "Meeting travel agents online", "Having no need for an itinerary"]},
+        {q: "According to the author, the internet can sometimes be ________ for users.", o: ["Overwhelming", "Cheaper than a phone", "Boring", "Very limited in data"]},
+        {q: "The word 'accessibility' in this context refers to:", o: ["The ease of finding and using information", "The physical distance to a hotel", "The rules of an airport", "The speed of a train"]},
+        {q: "What is the main topic of this first reading passage?", o: ["Changes in planning vacations in the digital era", "How to use travel apps properly", "The history of international hotels", "The decline of the tourism industry"]}
+    ],
+    r2: [
+        {q: "What simple action can help prevent plastic from reaching the ocean?", o: ["Reducing single-use plastics in daily life", "Building more recycling factories", "Using more cars in the city center", "Cleaning the air with high technology"]},
+        {q: "Why are cities currently promoting the use of bicycles?", o: ["To help reduce carbon emissions", "To make more money from citizens", "To increase the speed of heavy traffic", "To build more apartment buildings"]},
+        {q: "According to the text, small changes matter when they are:", o: ["Practiced by millions of people together", "Done only by one person in secret", "Very expensive to implement", "Happening only in rural areas"]},
+        {q: "What is considered 'key' to a sustainable future in the passage?", o: ["Education and understanding choices", "Buying new digital computers", "Building larger office buildings", "Using more plastic bottles daily"]},
+        {q: "The long-term impact of individual choices is described as:", o: ["Significant and meaningful", "Irrelevant to the entire planet", "Too small to measure correctly", "Only important for the government"]}
+    ],
+    r3: [
+        {q: "How has social media redefined our perception of the world?", o: ["It has made the world feel like a smaller place", "It has made international travel impossible", "It has created more face-to-face time", "It has increased the price of dining out"]},
+        {q: "What is a negative observation made by experts regarding communication?", o: ["It might be replacing deep, real interactions", "Smartphones are becoming too expensive", "Modern restaurants are becoming too noisy", "People are talking too much to strangers"]},
+        {q: "In restaurants, what is it common to see people doing instead of talking?", o: ["Looking at their phones", "Eating too fast and running", "Dancing and singing together", "Sleeping during the dinner time"]},
+        {q: "The author suggests that social well-being requires which of the following?", o: ["A balance between digital and physical life", "Deleting all social media accounts forever", "Using your phone during every single meal", "Living in a large city with no technology"]},
+        {q: "Real-time connection with family members is now possible:", o: ["Across the entire globe", "Only in the same office building", "During the morning hours only", "Without any internet connection at all"]}
+    ],
+    r4: [
+        {q: "Why did remote work become a general necessity recently?", o: ["Due to a global health crisis", "Because people were bored with offices", "To save money on expensive lunches", "Because computers became much cheaper"]},
+        {q: "What is a specific benefit enjoyed by many remote workers?", o: ["Flexibility and no daily commute", "Feelings of total isolation", "Working in a noisy office environment", "Living in a large factory"]},
+        {q: "A common struggle mentioned for those working from home is:", o: ["Separating work life from personal life", "Finding a comfortable chair to sit in", "Having too much food in the kitchen", "Sleeping during the entire day"]},
+        {q: "What do remote workers need to maintain their productivity?", o: ["A clear schedule and a dedicated workspace", "More coffee and expensive snacks", "A very traditional manager watching them", "A noisy environment to feel busy"]},
+        {q: "According to the text, a lack of structure can lead some workers to:", o: ["Work longer hours than in the office", "Work much less than before", "Quit their jobs immediately", "Forget how to use a computer"]}
+    ],
+    struct: [
+        {q: "The project was extremely demanding last month. If the team ________ more time, they would have finished the report without errors. Unfortunately, the deadline was too short for everyone.", o: ["had had", "have had", "had", "would have"]},
+        {q: "The office is currently empty and very quiet. The manager suggested that the documents ________ delivered to his house this afternoon by courier. He needs to review them before the morning meeting.", o: ["be", "is", "was", "being"]},
+        {q: "The conference was a total success for the company. Not only ________ the keynote speech, but they also organized the final workshop perfectly. All the clients were very impressed.", o: ["did they record", "they recorded", "recorded they", "they did record"]},
+        {q: "The storm was completely unexpected and it rained all day. I wish I ________ my umbrella at the office before leaving for the meeting. I arrived at the restaurant completely wet.", o: ["hadn't left", "had left", "left", "would leave"]},
+        {q: "The supervisor was very strict about the schedule. By the time he arrived at the factory, all the workers ________ the production line. No one was allowed to take a break after that.", o: ["had finished", "finish", "have finished", "were finishing"]},
+        {q: "She is a very talented and respected leader. No sooner ________ the office than everyone started asking for her professional help. She managed to solve every problem in minutes.", o: ["had she entered", "she entered", "did she enter", "she has entered"]},
+        {q: "The university rules are very clear this semester. It is essential that every student ________ the registration form by tomorrow morning. Failure to do so will result in a penalty.", o: ["complete", "completes", "completed", "to complete"]},
+        {q: "The mountain trail was very hard and steep. The higher the group climbed, ________ the air became for the tired explorers. They had to stop several times to breathe properly.", o: ["the thinner", "thinner", "more thin", "the thinnest"]},
+        {q: "The actress was very professional and convincing. She acts as if she ________ the owner of the company in real life. Her performance was definitely the best part of the show.", o: ["were", "is", "was", "be"]},
+        {q: "The legal case was very intricate and difficult. ________ for your professional help, I would have failed to meet the deadline. I really appreciate all the time you spent on this.", o: ["Had it not been", "If it wasn't", "Were it not", "If not"]},
+        {q: "The deadline is coming very soon. The data ________ analyzed by the end of this month for the final presentation. We need to work faster to be ready on time.", o: ["will have been", "is", "has been", "will be"]},
+        {q: "The concert last night was absolutely beautiful. Never ________ such a beautiful performance in my entire life as a critic. The audience was silent during the whole show.", o: ["have I seen", "I have seen", "did I see", "I saw"]},
+        {q: "The room was very noisy during the event. They requested that the volume ________ kept to a minimum during the final speech. It was important that everyone could hear the speaker.", o: ["be", "is", "was", "being"]},
+        {q: "The journey was long and full of surprises. Little ________ how much their lives would change after that specific trip. It was a turning point for the whole family.", o: ["did they know", "they knew", "had they known", "they know"]},
+        {q: "The lawyer was very persistent during the trial. The suspect denied ________ the crime despite the evidence from the police. The jury will decide the result tomorrow morning.", o: ["committing", "to commit", "commit", "committed"]},
+        {q: "The weather was very strange last week. We ________ been walking for an hour when it suddenly started to snow. We were not prepared for such cold temperatures.", o: ["had", "have", "were", "was"]},
+        {q: "The laboratory was silent and empty. Hardly ________ the room when the alarm started ringing for no reason. It was a very confusing situation for the security guard.", o: ["had I entered", "I had entered", "did I enter", "I entered"]},
+        {q: "He is a very experienced professional. He ________ in this city for over ten years now. He knows all the best places to visit and work.", o: ["has been living", "lives", "is living", "lived"]},
+        {q: "The teacher was very inspiring for the children. The professor made the entire class ________ until the project was perfect. The results were amazing at the end of the year.", o: ["work", "to work", "working", "worked"]},
+        {q: "You look very surprised to see me. You ________ seen her yesterday; she was in London all day for a meeting. It must have been someone who looks like her.", o: ["can't have", "mustn't", "shouldn't", "might not"]}
+    ],
+    vocab: [
+        {q: "The presentation was perfect and clear. The teacher's explanation was ________, so all students understood the goal. There were no questions at the end of the class.", o: ["Lucid", "Ambiguous", "Vague", "Obscure"]},
+        {q: "The old house was dangerous for the neighbors. The city decided to ________ the structure and build a park. Now children have a safe place to play.", o: ["Demolish", "Restore", "Sustain", "Repeal"]},
+        {q: "She is a top student in her class. She is very ________ in her studies, always finishing early. Her teachers are very proud of her constant progress.", o: ["Diligent", "Lazy", "Idle", "Occasional"]},
+        {q: "The treatment was very helpful for me. To ________ the pain, the doctor recommended that I take some rest. I feel much better after following that advice.", o: ["Alleviate", "Exacerbate", "Intensify", "Worsen"]},
+        {q: "The company is growing very fast. Their goal is to ________ sales by 20% this year. They are hiring more people to reach that objective.", o: ["Augment", "Reduce", "Shrink", "Diminish"]},
+        {q: "The evidence was undisputed and final. The results were ________, proving the point beyond doubt. The committee accepted the report immediately.", o: ["Incontrovertible", "Questionable", "Unreliable", "Dubious"]},
+        {q: "The researcher is famous in her field. She is a ________ author with over fifty books published. Her work is studied in universities all over the world.", o: ["Prolific", "Idle", "Amateur", "Slow"]},
+        {q: "The issue was complex and difficult. It was ________, involving many different factors. We need a multidisciplinary team to solve this correctly.", o: ["Multifaceted", "Simple", "Uniform", "Single"]},
+        {q: "The building was neglected for decades. The structure's ________ was due to high humidity. A full renovation is now necessary to save the site.", o: ["Deterioration", "Growth", "Clarity", "Renovation"]},
+        {q: "Technology has changed our world. The ________ of AI tools changed how we work today. Many tasks are now much faster than before.", o: ["Advent", "Decline", "Failure", "Stability"]},
+        {q: "The report was exact and detailed. A ________ person is someone who is very careful with small details. This quality is essential for a professional accountant.", o: ["Meticulous", "Careless", "Quick", "Indifferent"]},
+        {q: "The plan was practical and realistic. It was ________, meaning it was possible and could work. The investors were happy to provide the necessary funds.", o: ["Feasible", "Impossible", "Absurd", "Unlikely"]},
+        {q: "The argument was logical and clear. His speech was ________ and convinced the jury. The trial ended earlier than everyone expected.", o: ["Cogent", "Weak", "Flawed", "Confusing"]},
+        {q: "Resources are limited on our planet. The ________ of natural resources is a threat to the world. We must find more sustainable ways to live.", o: ["Depletion", "Abundance", "Restoration", "Discovery"]},
+        {q: "The law was old and unnecessary. To ________ it is to officially cancel or abolish it. The new government promised to modernize the legal system.", o: ["Repeal", "Enforce", "Invoke", "Sustain"]},
+        {q: "The meaning of the sentence was unclear. The results were ________, having multiple meanings. We had to ask for a second opinion to be sure.", o: ["Ambiguous", "Lucid", "Empirical", "Clear"]},
+        {q: "The growth of the virus was rapid. The ________ was faster than health officials predicted. Emergency measures were implemented in the city.", o: ["Proliferation", "Atrophy", "Decline", "Stagnation"]},
+        {q: "She showed great strength during the crisis. Her ________ resilience has become an inspiration for us. She never gave up, even in the hardest moments.", o: ["Unwavering", "Fickle", "Weak", "Uncertain"]},
+        {q: "The error in the calculation was small. It was ________ and did not affect the final results. The project continued without any further delays.", o: ["Negligible", "Substantial", "Vast", "Immense"]},
+        {q: "The talk ended with a summary. To ________ is to summarize the main points at the end. This helps the audience remember the most important info.", o: ["Recapitulate", "Expand", "Obfuscate", "Ignore"]}
+    ],
+    writ: [
+        {q: "The situation is slowly improving. ________, unemployment remains high in several sectors. Government leaders are looking for new solutions.", o: ["Nevertheless", "Consequently", "Therefore", "Furthermore"]},
+        {q: "Writing an essay requires a formal tone. Which of the following is the most formal way to express an idea? It is better than using personal opinions.", o: ["It is generally believed that", "I think that", "People say", "I'm sure that"]},
+        {q: "The project was a complete success. ________, we will proceed to the next phase as planned. The budget for next year has already been approved.", o: ["Consequently", "Nevertheless", "However", "Similarly"]},
+        {q: "Structure is important for a good essay. A thesis statement is usually located in the ________. It helps the reader understand the main argument.", o: ["Introduction", "Conclusion", "Body", "Bibliography"]},
+        {q: "Originality is vital in academic writing. To 'paraphrase' a source correctly means to ________ while giving credit. This helps to avoid plagiarism issues.", o: ["Rewrite in your own words", "Copy it exactly", "Delete it", "Translate it"]},
+        {q: "Word choice affects the quality of a text. Which word is more formal than 'bad' to describe a negative effect? It sounds more professional.", o: ["Detrimental", "Awful", "Terrible", "Gross"]},
+        {q: "The report presented new facts. The phrase 'In light of recent evidence' is used to ________. It is a common expression in research papers.", o: ["Provide a reason", "End a story", "Ask a question", "Show contrast"]},
+        {q: "Paragraphs must have a clear focus. A topic sentence serves to ________ and keep the reader focused. It usually appears at the beginning.", o: ["State the main idea", "Conclude the essay", "List references", "Introduce the author"]},
+        {q: "Critical thinking requires integrating data. To 'synthesize' information means to ________ from various sources. It is a high-level academic skill.", o: ["Combine different ideas", "Break things apart", "Discard data", "Copy one source"]},
+        {q: "Contrasting ideas need clear connectors. Which connector shows a direct contrast between two sentences? It helps to show a different perspective.", o: ["Conversely", "Moreover", "Additionally", "Hence"]},
+        {q: "Objectivity is key for academic credibility. Academic writing should maintain an ________ tone. This ensures the focus stays on the evidence.", o: ["Objective", "Emotional", "Biased", "Casual"]},
+        {q: "Adding info requires specific words. The word 'Moreover' is used to ________ without changing the topic. It builds a stronger argument.", o: ["Add information", "Contrast", "Result", "Time"]},
+        {q: "Verification is part of research. A bibliography is a list of ________ used during the work. It allows readers to find the original texts.", o: ["Sources", "Friends", "Plans", "Scores"]},
+        {q: "Ethics are important for students. Plagiarism is the act of ________ and is punished. Students must always be honest about their work.", o: ["Using work without credit", "Writing fast", "Quoting correctly", "Translating"]},
+        {q: "Conclusions must signal the end. Which is a formal way to start a closing paragraph? It tells the reader the argument is finishing.", o: ["In conclusion,", "To sum it up,", "I'm done,", "Finally,"]},
+        {q: "Flow makes a text professional. A transition word helps the reader to ________ between sections. It creates a logical path for the reader.", o: ["Link ideas", "Define words", "Count words", "End a book"]},
+        {q: "Synonyms improve the style of an essay. The word 'Furthermore' is a formal synonym for ________. It adds a new point to the discussion.", o: ["In addition", "However", "Because", "So"]},
+        {q: "Punctuation is vital for clarity. Which sentence is correctly punctuated for a formal list? Lists should follow standard academic rules.", o: ["Include: pens, paper, and ink.", "Include, pens paper ink.", "Include pens; paper; ink.", "Include: pens paper ink."]},
+        {q: "Summaries must be short and direct. The purpose of a professional summary is to be ________. It should only contain the most vital information.", o: ["Concise", "Longer than original", "Confusing", "Detailed"]},
+        {q: "Formal vocabulary shows a high level. Which word is most formal for a university paper? It sounds much better than using 'get' or 'buy'.", o: ["Acquire", "Get", "Grab", "Buy"]}
+    ]
+};
+
+function startExam() {
+    const n = document.getElementById('reg-name').value;
+    const e = document.getElementById('reg-email').value;
+    if(!n || !e) return alert("Completa tus datos.");
+    document.getElementById('hidden-name').value = n;
+    document.getElementById('hidden-email').value = e;
+    navTo(1);
+    buildExam();
+}
+
+function navTo(s) {
+    document.querySelectorAll('.step').forEach(x => x.classList.remove('active'));
+    document.getElementById('step-' + s).classList.add('active');
+    window.scrollTo(0,0);
+}
+
+function buildExam() {
+    ['r1','r2','r3','r4'].forEach((key, i) => {
+        const cont = document.getElementById('r-cont-' + (i+1));
+        cont.innerHTML = "";
+        quizData[key].forEach((item, idx) => cont.innerHTML += createQ(item, (i*5) + idx + 1));
+    });
+    document.getElementById('s-content').innerHTML = "";
+    quizData.struct.forEach((item, i) => document.getElementById('s-content').innerHTML += createQ(item, 21 + i));
+    document.getElementById('v-content').innerHTML = "";
+    quizData.vocab.forEach((item, i) => document.getElementById('v-content').innerHTML += createQ(item, 41 + i));
+    document.getElementById('w-content').innerHTML = "";
+    quizData.writ.forEach((item, i) => document.getElementById('w-content').innerHTML += createQ(item, 61 + i));
+}
+
+function createQ(item, num) {
+    const correct = item.o[0];
+    const shuffled = [...item.o].sort(() => Math.random() - 0.5);
+    return `<div class="question-block"><label>${num}. ${item.q}</label>
+            <select name="Q${num}" data-ans="${correct}"><option value="">Select...</option>
+            ${shuffled.map(o => `<option value="${o}">${o}</option>`).join('')}
+            </select></div>`;
+}
+
+function finalize() {
+    let r=0, s=0, v=0, w=0;
+    let report = "\n--- ANALISIS DETALLADO PARA RAFAEL ---\n";
+    const form = document.getElementById('placementForm');
+
+    for(let i=1; i<=80; i++) {
+        const sel = form["Q"+i];
+        if(sel) {
+            const userVal = sel.value || "Not answered";
+            const correctVal = sel.getAttribute('data-ans');
+            if(userVal === correctVal) {
+                if(i <= 20) r++; else if(i <= 40) s++; else if(i <= 60) v++; else w++;
+                report += `Q${i}: ${userVal} | ✅ CORRECT\n`;
+            } else {
+                report += `Q${i}: ${userVal} | ❌ INCORRECT (Correct: ${correctVal})\n`;
+            }
+        }
+    }
+
+    const total = r+s+v+w;
+    const pct = (total/80)*100;
+    let msg = pct <= 50 ? "I advise you to check this again." : pct <= 75 ? "It's Ok but you need to improve." : pct <= 90 ? "You are doing well but you can do better." : pct <= 98 ? "You are mastering, continue growing up." : "Great job, keep like this.";
+
+    document.getElementById('res-r').value = r+"/20";
+    document.getElementById('res-s').value = s+"/20";
+    document.getElementById('res-v').value = v+"/20";
+    document.getElementById('res-w').value = w+"/20";
+    document.getElementById('res-total').value = total+"/80";
+    document.getElementById('hiddenFeedback').value = msg;
+    document.getElementById('detailed-analysis').value = report;
+
+    document.getElementById('resDisplay').innerHTML = `<p>Reading: ${r}/20</p><p>Structure: ${s}/20</p><p>Vocabulary: ${v}/20</p><p>Writing: ${w}/20</p><hr><h4>Total Score: ${total}/80</h4><p><i>"${msg}"</i></p>`;
+
+    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+    .then(() => navTo(8));
+}
+</script>
+</body>
+</html>
